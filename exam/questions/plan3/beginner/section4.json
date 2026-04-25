@@ -1,0 +1,124 @@
+{
+  "name": "框题四：生物群系",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义生物群系",
+      "template": "public class ModBiomes {\n    public static final Biome CUSTOM_BIOME = new Biome.Builder()\n        .precipitation(true)\n        .temperature(0.7f)\n        .downfall(0.8f)\n        .effects(new BiomeEffects.Builder()\n            .waterColor(0x3f76e4)\n            .waterFogColor(0x050533)\n            .skyColor(0x77aaff)\n            .fogColor(0xc0d8ff)\n            .build())\n        .build();\n}",
+      "keywords": ["Biome.Builder", "precipitation", "temperature", "downfall", "BiomeEffects"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册生物群系",
+      "template": "public static final RegistryKey<Biome> CUSTOM_BIOME_KEY = RegistryKey.of(RegistryKeys.BIOME, new Identifier(\"modid\", \"custom_biome\"));\nRegistry.register(Registries.BIOME, CUSTOM_BIOME_KEY.getValue(), ModBiomes.CUSTOM_BIOME);",
+      "keywords": ["RegistryKey", "RegistryKeys.BIOME", "Registry.register", "Registries.BIOME", "getValue"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：配置生物群系生成设置",
+      "template": ".generationSettings(new GenerationSettings.Builder()\n    .feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationConfiguredFeatures.TREES_PLAINS)\n    .build())",
+      "keywords": ["GenerationSettings", "feature", "GenerationStep", "VegetationConfiguredFeatures", "DefaultBiomeFeatures"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：配置生物群系生物生成",
+      "template": ".spawnSettings(new SpawnSettings.Builder()\n    .spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 10, 2, 3))\n    .build())",
+      "keywords": ["SpawnSettings", "spawn", "SpawnGroup", "SpawnEntry", "weight"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：配置生物群系地表规则",
+      "template": ".surfaceRule(new SequenceSurfaceRule(ImmutableList.of(\n        new ConditionSurfaceRule(WaterCondition.INSTANCE, new BlockRule(Blocks.SAND.getDefaultState())),\n        new BlockRule(Blocks.GRASS_BLOCK.getDefaultState())\n    )))",
+      "keywords": ["surfaceRule", "SequenceSurfaceRule", "ConditionSurfaceRule", "BlockRule", "WaterCondition"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建生物群系标签",
+      "template": "{\n  \"values\": [\n    \"modid:custom_biome\"\n  ]\n}",
+      "keywords": ["tags", "biome", "values", "worldgen", "has_structure"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：在维度中使用自定义生物群系",
+      "template": "\"biome_source\": {\n  \"type\": \"minecraft:fixed\",\n  \"biome\": \"modid:custom_biome\"\n}",
+      "keywords": ["biome_source", "fixed", "multi_noise", "checkerboard", "biome"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：生物群系注册使用的注册表类是？",
+      "options": ["A. Registries.BIOME", "B. Registries.BIOME_SOURCE", "C. Registries.WORLD", "D. Registries.DIMENSION"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：温度范围通常是多少？",
+      "options": ["A. 0.0-2.0", "B. 0.0-1.0", "C. -1.0-1.0", "D. 0.0-3.0"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：降雨量范围通常是多少？",
+      "options": ["A. 0.0-1.0", "B. 0.0-2.0", "C. -1.0-1.0", "D. 0.0-3.0"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：水体颜色使用什么格式表示？",
+      "options": ["A. 十六进制 RGB", "B. 十进制 RGB", "C. 十六进制 RGBA", "D. 字符串"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：SpawnGroup.CREATURE 包含哪些生物？",
+      "options": ["A. 动物类", "B. 怪物类", "C. 环境生物", "D. 水生生物"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：生成权重 weight 的作用是什么？",
+      "options": ["A. 数字越大生成概率越高", "B. 数字越小生成概率越高", "C. 不影响概率", "D. 决定生成数量"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：VegetationConfiguredFeatures.TREES_PLAINS 表示什么？",
+      "options": ["A. 平原树木", "B. 森林树木", "C. 沙漠树木", "D. 雪地树木"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：固定生物群系源的类型是？",
+      "options": ["A. fixed", "B. multi_noise", "C. checkerboard", "D. the_end"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：生物群系 JSON 文件放在哪个目录？",
+      "options": ["A. data/modid/worldgen/biome/", "B. assets/modid/biome/", "C. data/minecraft/biome/", "D. worldgen/biome/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：precipitation 为 false 表示什么？",
+      "options": ["A. 不下雨/雪", "B. 下雨", "C. 下雪", "D. 随机天气"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

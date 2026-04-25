@@ -1,0 +1,124 @@
+{
+  "name": "框题一：网络数据包",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建 C2S 数据包",
+      "template": "public class ClientPacketSender {\n    private static final Identifier PACKET_ID = new Identifier(\"modid\", \"c2s_packet\");\n    public static void send(String message) {\n        PacketByteBuf buf = PacketByteBufs.create();\n        buf.writeString(message);\n        ClientPlayNetworking.send(PACKET_ID, buf);\n    }\n}",
+      "keywords": ["ClientPlayNetworking", "send", "PacketByteBufs", "Identifier", "c2s"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建 S2C 数据包",
+      "template": "public class ServerPacketSender {\n    private static final Identifier PACKET_ID = new Identifier(\"modid\", \"s2c_packet\");\n    public static void send(ServerPlayerEntity player, String message) {\n        PacketByteBuf buf = PacketByteBufs.create();\n        buf.writeString(message);\n        ServerPlayNetworking.send(player, PACKET_ID, buf);\n    }\n}",
+      "keywords": ["ServerPlayNetworking", "send", "PacketByteBufs", "ServerPlayerEntity", "s2c"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：注册服务端接收器",
+      "template": "public class ServerPacketReceiver {\n    public static void register() {\n        ServerPlayNetworking.registerGlobalReceiver(PACKET_ID, (server, player, handler, buf, responseSender) -> {\n            String message = buf.readString();\n            server.execute(() -> {\n                player.sendMessage(Text.literal(\"收到: \" + message), false);\n            });\n        });\n    }\n}",
+      "keywords": ["ServerPlayNetworking", "registerGlobalReceiver", "server.execute", "readString", "sendMessage"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：注册客户端接收器",
+      "template": "public class ClientPacketReceiver {\n    public static void register() {\n        ClientPlayNetworking.registerGlobalReceiver(PACKET_ID, (client, handler, buf, responseSender) -> {\n            String message = buf.readString();\n            client.execute(() -> {\n                if (client.player != null) {\n                    client.player.sendMessage(Text.literal(\"收到: \" + message), false);\n                }\n            });\n        });\n    }\n}",
+      "keywords": ["ClientPlayNetworking", "registerGlobalReceiver", "client.execute", "readString", "sendMessage"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：发送 NBT 数据包",
+      "template": "public static void sendNbt(ServerPlayerEntity player, NbtCompound nbt) {\n    PacketByteBuf buf = PacketByteBufs.create();\n    buf.writeNbt(nbt);\n    ServerPlayNetworking.send(player, NBT_PACKET_ID, buf);\n}",
+      "keywords": ["writeNbt", "NbtCompound", "PacketByteBuf", "ServerPlayNetworking", "send"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：接收 NBT 数据包",
+      "template": "ServerPlayNetworking.registerGlobalReceiver(NBT_PACKET_ID, (server, player, handler, buf, responseSender) -> {\n    NbtCompound receivedNbt = buf.readNbt();\n    server.execute(() -> {\n        if (receivedNbt != null) {\n            // 处理 NBT 数据\n        }\n    });\n});",
+      "keywords": ["readNbt", "NbtCompound", "registerGlobalReceiver", "server.execute", "receivedNbt"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：发送整数数据包",
+      "template": "public static void sendInt(ServerPlayerEntity player, int value) {\n    PacketByteBuf buf = PacketByteBufs.create();\n    buf.writeInt(value);\n    ServerPlayNetworking.send(player, INT_PACKET_ID, buf);\n}",
+      "keywords": ["writeInt", "int", "PacketByteBuf", "ServerPlayNetworking", "send"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：C2S 数据包的含义是？",
+      "options": ["A. 客户端到服务端", "B. 服务端到客户端", "C. 客户端到客户端", "D. 服务端到服务端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：S2C 数据包的含义是？",
+      "options": ["A. 服务端到客户端", "B. 客户端到服务端", "C. 客户端到客户端", "D. 服务端到服务端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：registerGlobalReceiver 需要在哪端调用？",
+      "options": ["A. 服务端注册服务端接收器，客户端注册客户端接收器", "B. 两端都注册服务端接收器", "C. 两端都注册客户端接收器", "D. 只在服务端注册"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：server.execute() 的作用是什么？",
+      "options": ["A. 确保在主线程执行", "B. 异步执行", "C. 延迟执行", "D. 重复执行"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：PacketByteBufs.create() 返回什么？",
+      "options": ["A. PacketByteBuf", "B. ByteBuf", "C. DataBuffer", "D. NetworkBuffer"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：writeString 和 readString 的顺序必须？",
+      "options": ["A. 一致", "B. 相反", "C. 任意", "D. 不需要考虑"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：数据包频道的 Identifier 需要在哪端保持一致？",
+      "options": ["A. 客户端和服务端", "B. 仅客户端", "C. 仅服务端", "D. 任意端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：writeNbt 方法写入的 NBT 大小有限制吗？",
+      "options": ["A. 有，不能太大", "B. 无限制", "C. 最多 1KB", "D. 最多 64KB"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：ClientPlayNetworking 在哪个包下？",
+      "options": ["A. net.fabricmc.fabric.api.client.networking.v1", "B. net.fabricmc.fabric.api.networking.v1", "C. net.minecraft.network", "D. net.fabricmc.api"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：ServerPlayNetworking 在哪个包下？",
+      "options": ["A. net.fabricmc.fabric.api.networking.v1", "B. net.fabricmc.fabric.api.client.networking.v1", "C. net.minecraft.network", "D. net.fabricmc.api"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

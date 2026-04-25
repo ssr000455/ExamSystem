@@ -1,0 +1,124 @@
+{
+  "name": "框题七：自定义燃料",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建燃料物品",
+      "template": "public class CustomFuelItem extends Item {\n    public CustomFuelItem(Settings settings) {\n        super(settings);\n    }\n}",
+      "keywords": ["fuel", "Item", "Settings", "maxCount", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册燃料时间",
+      "template": "FuelRegistry.INSTANCE.add(ModItems.CUSTOM_FUEL, 1600);",
+      "keywords": ["FuelRegistry", "INSTANCE", "add", "fuel", "time"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：注册多种燃料",
+      "template": "FuelRegistry.INSTANCE.add(ModItems.CUSTOM_FUEL, 1600);\nFuelRegistry.INSTANCE.add(ModItems.CUSTOM_BLOCK.asItem(), 3200);\nFuelRegistry.INSTANCE.add(ModItems.CUSTOM_PLANKS, 300);",
+      "keywords": ["add", "fuel", "time", "block", "planks"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：配置燃料时间",
+      "template": "// 原版参考：\n// 煤炭：1600 tick\n// 木炭：1600 tick\n// 木板：300 tick\n// 原木：300 tick\n// 熔岩桶：20000 tick\n// 干海带块：4000 tick",
+      "keywords": ["tick", "coal", "charcoal", "planks", "lava"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建可堆叠燃料",
+      "template": "public static final Item CUSTOM_FUEL = new Item(new FabricItemSettings().maxCount(64));\nFuelRegistry.INSTANCE.add(CUSTOM_FUEL, 800);",
+      "keywords": ["maxCount", "stack", "fuel", "time", "registry"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：批量注册燃料",
+      "template": "for (Item item : ModItems.FUEL_ITEMS) {\n    FuelRegistry.INSTANCE.add(item, 1600);\n}",
+      "keywords": ["for", "loop", "batch", "register", "fuel"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建燃料标签",
+      "template": "{\n  \"replace\": false,\n  \"values\": [\n    \"modid:custom_fuel\",\n    \"modid:custom_block\"\n  ]\n}",
+      "keywords": ["tag", "fuel", "values", "replace", "items"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：燃料注册使用哪个类？",
+      "options": ["A. FuelRegistry", "B. FuelManager", "C. BurnTimeRegistry", "D. SmeltingRegistry"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：燃料时间的单位是什么？",
+      "options": ["A. tick", "B. 秒", "C. 毫秒", "D. 分钟"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：一个煤炭的燃烧时间是多少？",
+      "options": ["A. 1600 tick", "B. 800 tick", "C. 3200 tick", "D. 6400 tick"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：一个木板的燃烧时间是多少？",
+      "options": ["A. 300 tick", "B. 150 tick", "C. 600 tick", "D. 1200 tick"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：一桶熔岩的燃烧时间是多少？",
+      "options": ["A. 20000 tick", "B. 10000 tick", "C. 40000 tick", "D. 80000 tick"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：干海带块的燃烧时间是多少？",
+      "options": ["A. 4000 tick", "B. 2000 tick", "C. 8000 tick", "D. 16000 tick"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：燃料物品是否需要特殊注册？",
+      "options": ["A. 不需要，直接添加即可", "B. 需要特殊接口", "C. 需要继承特殊类", "D. 需要数据包"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：FuelRegistry 在哪个包下？",
+      "options": ["A. net.fabricmc.fabric.api.registry", "B. net.minecraft.registry", "C. net.fabricmc.api", "D. net.minecraft.util"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：方块物品作为燃料时使用什么注册？",
+      "options": ["A. 使用 asItem() 获取物品实例", "B. 直接注册方块", "C. 注册方块实体", "D. 注册流体"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：原版熔炉烧炼一个物品需要多少 tick？",
+      "options": ["A. 200", "B. 100", "C. 400", "D. 800"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "name": "框题八：事件与网络",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：监听服务端 Tick 事件",
+      "template": "public class ModEvents {\n    public static void register() {\n        // TODO: 注册服务端 Tick 事件\n        \n    }\n}",
+      "keywords": ["ServerTickEvents", "START_SERVER_TICK", "END_SERVER_TICK", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：监听玩家破坏方块事件",
+      "template": "public class BlockBreakHandler {\n    public static void register() {\n        // TODO: 注册方块破坏事件\n        \n    }\n}",
+      "keywords": ["PlayerBlockBreakEvents", "BEFORE", "AFTER", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建 C2S 数据包",
+      "template": "public class ClientPacketSender {\n    public static void sendPacket() {\n        // TODO: 创建并发送 C2S 数据包\n        \n    }\n}",
+      "keywords": ["ClientPlayNetworking", "send", "PacketByteBufs", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建 S2C 数据包",
+      "template": "public class ServerPacketSender {\n    public static void sendPacket() {\n        // TODO: 创建并发送 S2C 数据包\n        \n    }\n}",
+      "keywords": ["ServerPlayNetworking", "send", "PacketByteBufs", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：注册服务端数据包接收器",
+      "template": "public class ServerPacketReceiver {\n    public static void register() {\n        // TODO: 注册服务端接收器\n        \n    }\n}",
+      "keywords": ["ServerPlayNetworking", "registerGlobalReceiver", "server.execute"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：注册客户端数据包接收器",
+      "template": "public class ClientPacketReceiver {\n    public static void register() {\n        // TODO: 注册客户端接收器\n        \n    }\n}",
+      "keywords": ["ClientPlayNetworking", "registerGlobalReceiver", "client.execute"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：监听玩家攻击实体事件",
+      "template": "public class AttackHandler {\n    public static void register() {\n        // TODO: 注册攻击实体事件\n        \n    }\n}",
+      "keywords": ["AttackEntityCallback", "EVENT", "register", "ActionResult"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：C2S 数据包的含义是？",
+      "options": ["A. 客户端到服务端", "B. 服务端到客户端", "C. 客户端到客户端", "D. 服务端到服务端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：数据包接收器中为什么需要 server.execute()？",
+      "options": ["A. 确保在主线程执行", "B. 确保在子线程执行", "C. 异步执行", "D. 延迟执行"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：下列哪个不是 Fabric 事件回调？",
+      "options": ["A. ServerTickEvents", "B. ClientTickEvents", "C. PlayerJoinEvent", "D. ServerLivingEntityEvents"],
+      "answer": 2,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：数据包缓冲区使用哪个类创建？",
+      "options": ["A. PacketByteBufs", "B. PacketBuffer", "C. ByteBuf", "D. DataBuffer"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：PlayerBlockBreakEvents.BEFORE 返回 false 表示什么？",
+      "options": ["A. 取消破坏", "B. 允许破坏", "C. 重试破坏", "D. 忽略事件"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：数据包频道的 Identifier 需要在哪端保持一致？",
+      "options": ["A. 客户端和服务端", "B. 仅客户端", "C. 仅服务端", "D. 任意端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：下列哪个用于监听实体受伤？",
+      "options": ["A. ServerLivingEntityEvents.ALLOW_DAMAGE", "B. EntityDamageEvent", "C. LivingDamageEvent", "D. PlayerDamageEvent"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：AttackEntityCallback 返回 ActionResult.FAIL 表示什么？",
+      "options": ["A. 取消攻击", "B. 允许攻击", "C. 重试攻击", "D. 忽略攻击"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：服务端连接事件使用哪个类？",
+      "options": ["A. ServerPlayConnectionEvents", "B. ClientPlayConnectionEvents", "C. ServerConnectionEvents", "D. PlayerConnectionEvents"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：数据包缓冲区写入和读取的顺序必须？",
+      "options": ["A. 一致", "B. 相反", "C. 任意", "D. 不需要考虑"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

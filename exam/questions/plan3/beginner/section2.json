@@ -1,0 +1,124 @@
+{
+  "name": "框题二：矿物与世界生成",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义矿石方块",
+      "template": "public class CustomOreBlock extends ExperienceDroppingBlock {\n    public CustomOreBlock(Settings settings) {\n        super(settings, UniformIntProvider.create(3, 7));\n    }\n}",
+      "keywords": ["ExperienceDroppingBlock", "UniformIntProvider", "strength", "requiresTool", "MapColor"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：配置矿石生成特征",
+      "template": "{\n  \"type\": \"minecraft:ore\",\n  \"config\": {\n    \"size\": 8,\n    \"targets\": [\n      {\n        \"target\": {\"predicate_type\": \"minecraft:tag_match\", \"tag\": \"minecraft:stone_ore_replaceables\"},\n        \"state\": {\"Name\": \"modid:custom_ore\"}\n      }\n    ]\n  }\n}",
+      "keywords": ["configured_feature", "ore", "size", "targets", "tag_match"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：配置放置特征",
+      "template": "{\n  \"feature\": \"modid:custom_ore\",\n  \"placement\": [\n    {\"type\": \"minecraft:count\", \"count\": 6},\n    {\"type\": \"minecraft:in_square\"},\n    {\"type\": \"minecraft:height_range\", \"height\": {\"type\": \"minecraft:trapezoid\", \"min_inclusive\": {\"above_bottom\": -64}, \"max_inclusive\": {\"absolute\": 48}}},\n    {\"type\": \"minecraft:biome\"}\n  ]\n}",
+      "keywords": ["placed_feature", "count", "in_square", "height_range", "trapezoid"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：添加矿石生成到生物群系",
+      "template": "BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, new Identifier(\"modid\", \"custom_ore\"));",
+      "keywords": ["BiomeModifications", "addFeature", "BiomeSelectors", "GenerationStep", "UNDERGROUND_ORES"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建自定义深板岩矿石",
+      "template": "{\n  \"target\": {\"predicate_type\": \"minecraft:tag_match\", \"tag\": \"minecraft:deepslate_ore_replaceables\"},\n  \"state\": {\"Name\": \"modid:deepslate_custom_ore\"}\n}",
+      "keywords": ["deepslate_ore_replaceables", "deepslate", "target", "state", "Name"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：配置矿石生成高度范围",
+      "template": "{\"type\": \"minecraft:height_range\", \"height\": {\"type\": \"minecraft:uniform\", \"min_inclusive\": {\"absolute\": -32}, \"max_inclusive\": {\"absolute\": 64}}}",
+      "keywords": ["uniform", "height_range", "min_inclusive", "max_inclusive", "absolute"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建多个矿脉",
+      "template": "{\"type\": \"minecraft:count\", \"count\": {\"type\": \"minecraft:uniform\", \"min\": 4, \"max\": 8}}",
+      "keywords": ["uniform", "count", "min", "max", "veins"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：矿石方块通常继承哪个类？",
+      "options": ["A. ExperienceDroppingBlock", "B. OreBlock", "C. MineralBlock", "D. DropBlock"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：矿物生成的配置特征类型是？",
+      "options": ["A. minecraft:ore", "B. minecraft:mineral", "C. minecraft:vein", "D. minecraft:deposit"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：矿脉大小由哪个参数控制？",
+      "options": ["A. size", "B. count", "C. amount", "D. number"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：每个区块生成矿脉次数由 placement 中的哪个控制？",
+      "options": ["A. count", "B. size", "C. height_range", "D. in_square"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：stone_ore_replaceables 标签包含哪些方块？",
+      "options": ["A. 石头类方块", "B. 深板岩类方块", "C. 沙石类方块", "D. 土类方块"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：uniform 高度分布表示什么？",
+      "options": ["A. 均匀分布", "B. 梯形分布", "C. 三角形分布", "D. 正态分布"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：矿石生成添加到生物群系使用哪个方法？",
+      "options": ["A. BiomeModifications.addFeature", "B. Biome.addFeature", "C. WorldGen.addOre", "D. OreGen.addFeature"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：GenerationStep.Feature.UNDERGROUND_ORES 表示什么？",
+      "options": ["A. 地下矿石生成阶段", "B. 地表矿石生成", "C. 洞穴生成", "D. 结构生成"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：深板岩矿石使用哪个替换标签？",
+      "options": ["A. deepslate_ore_replaceables", "B. stone_ore_replaceables", "C. nether_ore_replaceables", "D. end_ore_replaceables"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：ExperienceDroppingBlock 的第二个参数是什么？",
+      "options": ["A. 经验值范围", "B. 掉落物品", "C. 挖掘等级", "D. 方块硬度"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

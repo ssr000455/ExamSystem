@@ -1,0 +1,75 @@
+{
+  "name": "框题五：多平台兼容",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：检测运行环境",
+      "template": "public class EnvironmentDetector {\n    public static boolean isClient() {\n        // TODO: 检测是否为客户端环境\n        return false;\n    }\n    \n    public static boolean isServer() {\n        // TODO: 检测是否为服务端环境\n        return false;\n    }\n}",
+      "keywords": ["EnvType", "CLIENT", "SERVER", "FabricLoader", "getEnvironmentType"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：平台特定代码隔离",
+      "template": "public class PlatformSpecific {\n    public static void execute() {\n        // TODO: 根据平台执行不同代码\n    }\n}",
+      "keywords": ["@Environment", "EnvType", "client", "server", "dedicated"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：操作系统检测",
+      "template": "public class OSDetector {\n    public static boolean isWindows() { return System.getProperty(\"os.name\").toLowerCase().contains(\"win\"); }\n    public static boolean isMac() { /* TODO */ return false; }\n    public static boolean isLinux() { /* TODO */ return false; }\n}",
+      "keywords": ["os.name", "System.getProperty", "Windows", "Mac", "Linux"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：路径分隔符处理",
+      "template": "public class PathHelper {\n    public static String normalizePath(String path) {\n        // TODO: 统一路径分隔符\n        return path.replace(\"\\\\\", \"/\");\n    }\n}",
+      "keywords": ["File.separator", "normalize", "replace", "path", "/"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：跨平台文件操作",
+      "template": "public class CrossPlatformFile {\n    public static Path getConfigPath() {\n        // TODO: 获取跨平台配置路径\n        return null;\n    }\n}",
+      "keywords": ["Paths", "get", "config", "FabricLoader", "getConfigDir"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：多版本 Minecraft 兼容",
+      "template": "public class VersionCompat {\n    public static boolean isVersionAtLeast(String version, String target) {\n        // TODO: 比较版本号\n        return false;\n    }\n}",
+      "keywords": ["version", "compare", "split", "parseInt", "semver"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：多模组加载器兼容",
+      "template": "public class LoaderCompat {\n    public static boolean isFabric() {\n        // TODO: 检测是否为 Fabric\n        return false;\n    }\n    \n    public static boolean isForge() {\n        // TODO: 检测是否为 Forge\n        return false;\n    }\n}",
+      "keywords": ["FabricLoader", "Forge", "loader", "detect", "modLoader"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：FabricLoader.getInstance().getEnvironmentType() 返回什么？",
+      "options": ["A. EnvType", "B. Environment", "C. Platform", "D. Side"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：@Environment 注解的作用是什么？",
+      "options": ["A. 限制类或方法只在特定环境加载", "B. 标记环境变量", "C. 配置环境参数", "D. 设置运行模式"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：跨平台路径处理最好使用什么？",
+      "options": ["A. Paths.get()", "B. 字符串拼接", "C. 硬编码路径", "D. File.separator"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

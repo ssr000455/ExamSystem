@@ -1,0 +1,124 @@
+{
+  "name": "框题二：村民与交易",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义村民职业",
+      "template": "public class ModVillagerProfessions {\n    public static final VillagerProfession CUSTOM_PROFESSION = register(\"custom_profession\", ModPointsOfInterest.CUSTOM_POI, ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER);\n    private static VillagerProfession register(String id, PointOfInterestType poi, ImmutableSet<Item> gatherableItems, ImmutableSet<Block> secondaryJobSites, SoundEvent workSound) {\n        return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(\"modid\", id), new VillagerProfession(id, entry -> entry.value() == poi, entry -> entry.value() == poi, gatherableItems, secondaryJobSites, workSound));\n    }\n}",
+      "keywords": ["VillagerProfession", "PointOfInterestType", "Registry.register", "Registries.VILLAGER_PROFESSION", "workSound"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建工作站点方块",
+      "template": "public class CustomWorkstationBlock extends Block {\n    public CustomWorkstationBlock(Settings settings) { super(settings); }\n}",
+      "keywords": ["Block", "workstation", "Settings", "strength", "mapColor"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：注册工作站点类型",
+      "template": "public class ModPointsOfInterest {\n    public static final PointOfInterestType CUSTOM_POI = register(\"custom_poi\", RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, new Identifier(\"modid\", \"custom_poi\")), 1, 1, ModBlocks.CUSTOM_WORKSTATION);\n    private static PointOfInterestType register(String id, RegistryKey<PointOfInterestType> key, int ticketCount, int searchDistance, Block... blocks) {\n        return Registry.register(Registries.POINT_OF_INTEREST_TYPE, key, new PointOfInterestType(Set.of(blocks), ticketCount, searchDistance));\n    }\n}",
+      "keywords": ["PointOfInterestType", "ticketCount", "searchDistance", "Registry.register", "Registries.POINT_OF_INTEREST_TYPE"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：添加村民交易（新手）",
+      "template": "TradeOfferHelper.registerVillagerOffers(ModVillagerProfessions.CUSTOM_PROFESSION, 1, factories -> {\n    factories.add(new TradeOffers.BuyItemFactory(Items.EMERALD, 1, 12, 2, 1));\n    factories.add(new TradeOffers.SellItemFactory(new ItemStack(ModItems.CUSTOM_ITEM), 1, 4, 1, 1));\n});",
+      "keywords": ["TradeOfferHelper", "registerVillagerOffers", "TradeOffers.BuyItemFactory", "TradeOffers.SellItemFactory", "level"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：添加村民交易（大师）",
+      "template": "TradeOfferHelper.registerVillagerOffers(ModVillagerProfessions.CUSTOM_PROFESSION, 5, factories -> {\n    factories.add(new TradeOffers.BuyItemFactory(Items.EMERALD, 20, 12, 2, 30));\n    factories.add(new TradeOffers.SellItemFactory(new ItemStack(ModItems.CUSTOM_GEM), 5, 1, 1, 30));\n});",
+      "keywords": ["level 5", "master", "EMERALD", "CUSTOM_GEM", "30"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：添加村民语言文件",
+      "template": "{\n  \"entity.minecraft.villager.custom_profession\": \"Custom Villager\",\n  \"block.modid.custom_workstation\": \"Custom Workstation\"\n}",
+      "keywords": ["entity.minecraft.villager", "block", "lang", "en_us", "zh_cn"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建村民生成",
+      "template": "BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), SpawnGroup.VILLAGER, EntityType.VILLAGER, 10, 1, 1);",
+      "keywords": ["BiomeModifications", "addSpawn", "SpawnGroup.VILLAGER", "EntityType.VILLAGER", "weight"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：村民职业注册使用的注册表是？",
+      "options": ["A. Registries.VILLAGER_PROFESSION", "B. Registries.ENTITY", "C. Registries.BLOCK", "D. Registries.ITEM"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：工作站点类型的 ticketCount 参数表示什么？",
+      "options": ["A. 同时可用数量", "B. 搜索半径", "C. 工作次数", "D. 经验值"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：村民交易级别1代表什么？",
+      "options": ["A. 新手", "B. 学徒", "C. 熟练工", "D. 大师"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：TradeOffers.BuyItemFactory 表示什么？",
+      "options": ["A. 村民收购", "B. 村民出售", "C. 交换物品", "D. 赠送物品"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：村民职业的名称翻译键格式是？",
+      "options": ["A. entity.minecraft.villager.profession_id", "B. entity.villager.profession_id", "C. villager.profession_id", "D. profession.villager.id"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：searchDistance 参数表示什么？",
+      "options": ["A. 村民搜索工作站点半径", "B. 村民移动速度", "C. 村民交易次数", "D. 村民经验值"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：村民交易中的 priceMultiplier 参数影响什么？",
+      "options": ["A. 价格浮动", "B. 交易次数", "C. 经验值", "D. 物品数量"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：村民职业的工作音效使用哪个事件？",
+      "options": ["A. SoundEvents.ENTITY_VILLAGER_WORK_ARMORER", "B. SoundEvents.ENTITY_VILLAGER_AMBIENT", "C. SoundEvents.ENTITY_VILLAGER_CELEBRATE", "D. SoundEvents.ENTITY_VILLAGER_TRADE"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：村民交易的最大次数耗尽后会怎样？",
+      "options": ["A. 需要等待刷新", "B. 永久消失", "C. 价格翻倍", "D. 变为其他交易"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：村民职业的次要工作站点用于什么？",
+      "options": ["A. 备选工作方块", "B. 主要工作方块", "C. 睡觉地点", "D. 集会地点"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

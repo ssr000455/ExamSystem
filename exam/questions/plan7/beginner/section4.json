@@ -1,0 +1,124 @@
+{
+  "name": "框题四：自定义数据组件",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义数据组件类型",
+      "template": "public class ModDataComponentTypes {\n    public static final ComponentType<Integer> CUSTOM_ENERGY = ComponentType.<Integer>builder()\n        .codec(Codec.INT)\n        .packetCodec(PacketCodecs.INTEGER)\n        .cache()\n        .build();\n    \n    public static void register() {\n        Registry.register(Registries.DATA_COMPONENT_TYPE, new Identifier(\"modid\", \"custom_energy\"), CUSTOM_ENERGY);\n    }\n}",
+      "keywords": ["ComponentType", "builder", "codec", "packetCodec", "Registry.register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：设置物品的数据组件",
+      "template": "ItemStack stack = new ItemStack(ModItems.CUSTOM_ITEM);\nstack.set(ModDataComponentTypes.CUSTOM_ENERGY, 100);",
+      "keywords": ["set", "DataComponentType", "ItemStack", "component", "value"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：获取物品的数据组件",
+      "template": "ItemStack stack = player.getMainHandStack();\nInteger energy = stack.get(ModDataComponentTypes.CUSTOM_ENERGY);\nif (energy != null) {\n    player.sendMessage(Text.literal(\"能量: \" + energy), false);\n}",
+      "keywords": ["get", "DataComponentType", "ItemStack", "null check", "value"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：修改数据组件值",
+      "template": "ItemStack stack = player.getMainHandStack();\nstack.apply(ModDataComponentTypes.CUSTOM_ENERGY, 0, energy -> energy + 10);",
+      "keywords": ["apply", "DataComponentType", "modify", "increment", "lambda"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建自定义复合数据组件",
+      "template": "public record CustomData(int value, String name, boolean active) {\n    public static final Codec<CustomData> CODEC = RecordCodecBuilder.create(instance ->\n        instance.group(\n            Codec.INT.fieldOf(\"value\").forGetter(CustomData::value),\n            Codec.STRING.fieldOf(\"name\").forGetter(CustomData::name),\n            Codec.BOOL.fieldOf(\"active\").forGetter(CustomData::active)\n        ).apply(instance, CustomData::new));\n}",
+      "keywords": ["record", "Codec", "RecordCodecBuilder", "fieldOf", "forGetter"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：注册复合数据组件",
+      "template": "public static final ComponentType<CustomData> CUSTOM_DATA = ComponentType.<CustomData>builder()\n    .codec(CustomData.CODEC)\n    .packetCodec(CustomData.PACKET_CODEC)\n    .cache()\n    .build();",
+      "keywords": ["ComponentType", "builder", "codec", "packetCodec", "CustomData"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：在工具提示中显示数据组件",
+      "template": "@Override\npublic void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {\n    super.appendTooltip(stack, context, tooltip, type);\n    Integer energy = stack.get(ModDataComponentTypes.CUSTOM_ENERGY);\n    if (energy != null) {\n        tooltip.add(Text.literal(\"能量: \" + energy).formatted(Formatting.GREEN));\n    }\n}",
+      "keywords": ["appendTooltip", "get", "DataComponentType", "tooltip", "Text.literal"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：数据组件注册使用的注册表是？",
+      "options": ["A. Registries.DATA_COMPONENT_TYPE", "B. Registries.ITEM", "C. Registries.COMPONENT", "D. Registries.NBT"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：ComponentType.builder()的codec方法用于什么？",
+      "options": ["A. 序列化和反序列化", "B. 网络传输", "C. 缓存", "D. 验证"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：packetCodec方法用于什么？",
+      "options": ["A. 网络数据包序列化", "B. JSON序列化", "C. NBT序列化", "D. 数据库存储"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：cache()方法的作用是什么？",
+      "options": ["A. 缓存组件实例", "B. 缓存组件值", "C. 缓存序列化结果", "D. 缓存网络包"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：ItemStack的set方法用于什么？",
+      "options": ["A. 设置数据组件值", "B. 获取数据组件值", "C. 删除数据组件", "D. 复制数据组件"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：apply方法的第一个参数表示什么？",
+      "options": ["A. 默认值", "B. 组件类型", "C. 当前值", "D. 目标值"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：RecordCodecBuilder用于什么？",
+      "options": ["A. 为record创建Codec", "B. 为class创建Codec", "C. 为enum创建Codec", "D. 为interface创建Codec"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：fieldOf方法用于什么？",
+      "options": ["A. 定义字段名称", "B. 定义字段类型", "C. 定义字段默认值", "D. 定义字段验证"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：数据组件替代了Minecraft 1.20.5之前的什么？",
+      "options": ["A. NBT数据", "B. 物品元数据", "C. 物品属性", "D. 物品附魔"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：TooltipType.Default表示什么？",
+      "options": ["A. 默认工具提示", "B. 高级工具提示", "C. 隐藏工具提示", "D. 自定义工具提示"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

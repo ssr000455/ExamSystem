@@ -1,0 +1,124 @@
+{
+  "name": "框题一：附魔系统",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义附魔类",
+      "template": "public class CustomEnchantment extends Enchantment {\n    public CustomEnchantment() {\n        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});\n    }\n    @Override\n    public int getMinLevel() { return 1; }\n    @Override\n    public int getMaxLevel() { return 3; }\n}",
+      "keywords": ["Enchantment", "Rarity", "EnchantmentTarget", "EquipmentSlot", "getMinLevel"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册附魔",
+      "template": "public class ModEnchantments {\n    public static final Enchantment CUSTOM_ENCHANTMENT = new CustomEnchantment();\n    public static void register() {\n        Registry.register(Registries.ENCHANTMENT, new Identifier(\"modid\", \"custom_enchantment\"), CUSTOM_ENCHANTMENT);\n    }\n}",
+      "keywords": ["Registry.register", "Registries.ENCHANTMENT", "Identifier", "Enchantment", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：实现附魔效果（攻击时触发）",
+      "template": "@Override\npublic void onTargetDamaged(LivingEntity user, Entity target, int level) {\n    if (target instanceof LivingEntity living) {\n        living.damage(user.getDamageSources().magic(), level * 2);\n    }\n}",
+      "keywords": ["onTargetDamaged", "LivingEntity", "damage", "level", "magic"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：实现附魔效果（穿戴时触发）",
+      "template": "@Override\npublic void onUserDamaged(LivingEntity user, Entity attacker, int level) {\n    if (attacker instanceof LivingEntity living) {\n        living.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, level - 1));\n    }\n}",
+      "keywords": ["onUserDamaged", "addStatusEffect", "StatusEffects", "SLOWNESS", "level"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：设置附魔兼容性",
+      "template": "@Override\npublic boolean canAccept(Enchantment other) {\n    if (other == Enchantments.SHARPNESS) {\n        return false;\n    }\n    return super.canAccept(other);\n}",
+      "keywords": ["canAccept", "Enchantments", "SHARPNESS", "return false", "super"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：设置附魔台等级需求",
+      "template": "@Override\npublic int getMinPower(int level) { return 10 + (level - 1) * 8; }\n@Override\npublic int getMaxPower(int level) { return getMinPower(level) + 20; }",
+      "keywords": ["getMinPower", "getMaxPower", "level", "power", "enchanting table"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：设置宝藏附魔",
+      "template": "@Override\npublic boolean isTreasure() { return true; }\n@Override\npublic boolean isAvailableForEnchantedBookOffer() { return true; }\n@Override\npublic boolean isAvailableForRandomSelection() { return false; }",
+      "keywords": ["isTreasure", "isAvailableForEnchantedBookOffer", "isAvailableForRandomSelection", "treasure", "book"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：附魔注册使用的注册表类是？",
+      "options": ["A. Registries.ENCHANTMENT", "B. Registries.ITEM", "C. Registries.BLOCK", "D. Registries.ENTITY"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：EnchantmentTarget.WEAPON 适用于哪些物品？",
+      "options": ["A. 剑和斧", "B. 镐和锹", "C. 盔甲", "D. 弓"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：附魔稀有度 Rarity.VERY_RARE 的名称颜色是？",
+      "options": ["A. 紫色", "B. 蓝色", "C. 青色", "D. 白色"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：onTargetDamaged 方法在什么时候调用？",
+      "options": ["A. 攻击目标时", "B. 穿戴者受伤时", "C. 挖掘方块时", "D. 使用物品时"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：canAccept 方法返回 false 表示什么？",
+      "options": ["A. 与其他附魔冲突", "B. 可以共存", "C. 需要更高等级", "D. 不需要等级"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：isTreasure 为 true 表示附魔只能从什么获得？",
+      "options": ["A. 战利品箱", "B. 附魔台", "C. 村民交易", "D. 钓鱼"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：附魔的最大等级通常由哪个方法定义？",
+      "options": ["A. getMaxLevel", "B. getMinLevel", "C. getMaxPower", "D. getMinPower"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：原版锋利附魔的最大等级是？",
+      "options": ["A. 5", "B. 3", "C. 4", "D. 6"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：附魔的默认最大等级是多少？",
+      "options": ["A. 1", "B. 3", "C. 5", "D. 10"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：EnchantmentTarget.ARMOR 适用于哪些部位？",
+      "options": ["A. 所有盔甲部位", "B. 仅头盔", "C. 仅胸甲", "D. 仅靴子"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

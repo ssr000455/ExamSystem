@@ -1,0 +1,124 @@
+{
+  "name": "框题五：动态注册与热重载",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：监听资源重载事件",
+      "template": "public class ResourceReloadListener {\n    public static void register() {\n        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloader() {\n            @Override\n            public void reload(ResourceManager manager) {\n                // TODO: 重载自定义数据\n                LOGGER.info(\"资源已重载\");\n            }\n            \n            @Override\n            public Identifier getFabricId() {\n                return new Identifier(\"modid\", \"custom_reloader\");\n            }\n        });\n    }\n}",
+      "keywords": ["ResourceManagerHelper", "registerReloadListener", "reload", "getFabricId", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：加载自定义JSON配置",
+      "template": "public class CustomConfigLoader extends JsonDataLoader {\n    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();\n    private Map<Identifier, CustomConfig> configs = new HashMap<>();\n    \n    public CustomConfigLoader() {\n        super(GSON, \"custom_config\");\n    }\n    \n    @Override\n    protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {\n        configs.clear();\n        prepared.forEach((id, json) -> {\n            CustomConfig config = GSON.fromJson(json, CustomConfig.class);\n            configs.put(id, config);\n        });\n    }\n}",
+      "keywords": ["JsonDataLoader", "Gson", "apply", "ResourceManager", "JsonElement"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：动态注册物品",
+      "template": "public class DynamicItemRegistry {\n    private static final Map<Identifier, Item> DYNAMIC_ITEMS = new HashMap<>();\n    \n    public static void registerItem(Identifier id, Item item) {\n        DYNAMIC_ITEMS.put(id, item);\n        Registry.register(Registries.ITEM, id, item);\n    }\n    \n    public static void unregisterItem(Identifier id) {\n        DYNAMIC_ITEMS.remove(id);\n    }\n}",
+      "keywords": ["Registry.register", "Registries.ITEM", "dynamic", "register", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建可重载的配方",
+      "template": "public class ReloadableRecipeManager {\n    private static RecipeManager customRecipeManager;\n    \n    public static void reloadRecipes(ResourceManager manager) {\n        customRecipeManager = new RecipeManager();\n        // 加载自定义配方\n    }\n    \n    public static Optional<Recipe<?>> getRecipe(Identifier id) {\n        return customRecipeManager != null ? customRecipeManager.get(id) : Optional.empty();\n    }\n}",
+      "keywords": ["RecipeManager", "reload", "get", "Optional", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：动态更新语言文件",
+      "template": "public class DynamicLanguageManager {\n    public static void addTranslation(String key, String value) {\n        Language language = Language.getInstance();\n        if (language instanceof TranslatableLanguage translatable) {\n            translatable.addTranslation(key, value);\n        }\n    }\n    \n    public static void reloadLanguage() {\n        MinecraftClient.getInstance().reloadResources();\n    }\n}",
+      "keywords": ["Language", "getInstance", "addTranslation", "reloadResources", "dynamic"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：监听配置变更",
+      "template": "public class ConfigWatcher {\n    private static WatchService watchService;\n    private static final Map<Path, Consumer<Path>> watchers = new HashMap<>();\n    \n    public static void watchConfig(Path configPath, Consumer<Path> onChange) throws IOException {\n        watchers.put(configPath, onChange);\n        if (watchService == null) {\n            watchService = FileSystems.getDefault().newWatchService();\n            startWatching();\n        }\n        configPath.getParent().register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);\n    }\n}",
+      "keywords": ["WatchService", "watch", "config", "ENTRY_MODIFY", "onChange"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：实现热重载命令",
+      "template": "public class ReloadCommand {\n    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {\n        dispatcher.register(literal(\"reloadcustom\")\n            .requires(source -> source.hasPermissionLevel(2))\n            .executes(context -> {\n                ServerCommandSource source = context.getSource();\n                source.getServer().reloadResources();\n                source.sendFeedback(() -> Text.literal(\"自定义资源已重载\"), true);\n                return 1;\n            }));\n    }\n}",
+      "keywords": ["literal", "reload", "reloadResources", "command", "permission"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：ResourceManagerHelper用于什么？",
+      "options": ["A. 注册资源重载监听器", "B. 管理资源包", "C. 加载纹理", "D. 加载模型"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：ResourceType.SERVER_DATA表示什么？",
+      "options": ["A. 服务端数据", "B. 客户端资源", "C. 世界数据", "D. 玩家数据"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：JsonDataLoader用于什么？",
+      "options": ["A. 加载JSON数据文件", "B. 加载纹理文件", "C. 加载模型文件", "D. 加载音效文件"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：apply方法在什么时候调用？",
+      "options": ["A. 资源重载时", "B. 模组初始化时", "C. 世界加载时", "D. 玩家登录时"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：动态注册物品需要注意什么？",
+      "options": ["A. 同步到客户端", "B. 内存泄漏", "C. 注册表锁定", "D. 以上都是"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：Language.getInstance()返回什么？",
+      "options": ["A. 当前语言实例", "B. 语言文件路径", "C. 翻译映射", "D. 语言设置"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：WatchService用于什么？",
+      "options": ["A. 监听文件变更", "B. 监听网络事件", "C. 监听游戏事件", "D. 监听玩家动作"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：StandardWatchEventKinds.ENTRY_MODIFY表示什么？",
+      "options": ["A. 文件修改事件", "B. 文件创建事件", "C. 文件删除事件", "D. 文件访问事件"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：reloadResources方法的作用是什么？",
+      "options": ["A. 重载所有资源", "B. 重载纹理", "C. 重载模型", "D. 重载音效"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：热重载的主要优势是什么？",
+      "options": ["A. 无需重启游戏即可更新内容", "B. 提高性能", "C. 减少内存使用", "D. 增加稳定性"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

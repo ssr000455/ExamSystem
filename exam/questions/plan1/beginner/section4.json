@@ -1,0 +1,124 @@
+{
+  "name": "框题四：盔甲与装备",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建一个自定义盔甲材料",
+      "template": "public enum ModArmorMaterials implements ArmorMaterial {\n    // TODO: 定义盔甲材料属性\n    \n}",
+      "keywords": ["ArmorMaterial", "getDurability", "getProtection", "getEnchantability", "getToughness"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建一个自定义头盔",
+      "template": "public class CustomHelmetItem extends ArmorItem {\n    // TODO: 实现自定义头盔\n    \n}",
+      "keywords": ["ArmorItem", "ArmorMaterial", "Type.HELMET", "super"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建全套盔甲（头盔、胸甲、护腿、靴子）",
+      "template": "public class ModArmor {\n    // TODO: 注册全套盔甲\n    \n}",
+      "keywords": ["HELMET", "CHESTPLATE", "LEGGINGS", "BOOTS", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：为盔甲添加套装效果",
+      "template": "public class CustomArmorItem extends ArmorItem {\n    @Override\n    public void inventoryTick(...) {\n        // TODO: 检测全套盔甲并给予效果\n        \n    }\n}",
+      "keywords": ["inventoryTick", "getEquippedStack", "isFullSet", "addStatusEffect"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建一个自定义弓类物品",
+      "template": "public class CustomBowItem extends BowItem {\n    @Override\n    public void onStoppedUsing(...) {\n        // TODO: 实现自定义弓\n        \n    }\n}",
+      "keywords": ["BowItem", "onStoppedUsing", "ArrowEntity", "setVelocity"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建一个箭矢实体",
+      "template": "public class CustomArrowEntity extends PersistentProjectileEntity {\n    // TODO: 实现自定义箭矢\n    \n}",
+      "keywords": ["PersistentProjectileEntity", "onEntityHit", "damage", "setDamage"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建一个盾牌类物品",
+      "template": "public class CustomShieldItem extends ShieldItem {\n    // TODO: 实现自定义盾牌\n    \n}",
+      "keywords": ["ShieldItem", "getMaxUseTime", "use", "onBlock"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：ArmorMaterial 中 getToughness() 返回什么？",
+      "options": ["A. 盔甲韧性", "B. 盔甲硬度", "C. 击退抗性", "D. 耐久度"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：下界合金盔甲的韧性是多少？",
+      "options": ["A. 3.0", "B. 2.0", "C. 1.0", "D. 4.0"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：盔甲的防护值由哪个方法定义？",
+      "options": ["A. getProtection()", "B. getDurability()", "C. getToughness()", "D. getArmorValue()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：弓的拉弓速度由哪个参数控制？",
+      "options": ["A. pullProgress", "B. drawSpeed", "C. chargeTime", "D. useDuration"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：下列哪个不是盔甲的类型？",
+      "options": ["A. Type.GLOVES", "B. Type.HELMET", "C. Type.CHESTPLATE", "D. Type.BOOTS"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：盔甲纹理文件应该放在哪个目录？",
+      "options": ["A. assets/modid/textures/models/armor/", "B. assets/modid/textures/armor/", "C. assets/minecraft/textures/models/armor/", "D. assets/modid/models/armor/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：弓的拉满弦时间大约是？",
+      "options": ["A. 1秒", "B. 0.5秒", "C. 2秒", "D. 1.5秒"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：盔甲材料中 getKnockbackResistance() 返回什么？",
+      "options": ["A. 击退抗性", "B. 爆炸抗性", "C. 火焰抗性", "D. 魔法抗性"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：盾牌的格挡角度是多少？",
+      "options": ["A. 180度", "B. 90度", "C. 270度", "D. 360度"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：弓的箭矢速度由哪个参数控制？",
+      "options": ["A. setVelocity 的 speed 参数", "B. setDamage", "C. setCritical", "D. setFire"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

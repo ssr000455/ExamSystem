@@ -1,0 +1,124 @@
+{
+  "name": "框题五：配置与兼容",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建模组配置文件",
+      "template": "public class ModConfig {\n    public static final Config CONFIG = Config.create();\n    // TODO: 定义配置项\n}",
+      "keywords": ["Config", "ConfigFile", "Toml", "Json", "load"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：读取配置值",
+      "template": "public class ConfigReader {\n    public void readConfig() {\n        // TODO: 读取配置\n    }\n}",
+      "keywords": ["getConfig", "getValue", "parse", "read"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建 Cloth Config 界面",
+      "template": "public class ModMenuIntegration implements ModMenuApi {\n    @Override\n    public ConfigScreenFactory<?> getModConfigScreenFactory() {\n        // TODO: 创建配置界面\n        return screen -> ClothConfigScreen.create(screen, ModConfig.CONFIG);\n    }\n}",
+      "keywords": ["ModMenuApi", "ClothConfig", "ConfigScreenFactory", "getModConfigScreenFactory"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：声明模组依赖",
+      "template": "{\n  \"depends\": {\n    \"fabricloader\": \">=0.15.0\",\n    \"minecraft\": \"~1.20.1\",\n    // TODO: 添加依赖\n  }\n}",
+      "keywords": ["fabric.mod.json", "depends", "recommends", "suggests", "breaks"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：检查模组是否加载",
+      "template": "public class ModCompat {\n    public static boolean isModLoaded(String modid) {\n        // TODO: 检查模组是否加载\n        return FabricLoader.getInstance().isModLoaded(modid);\n    }\n}",
+      "keywords": ["FabricLoader", "isModLoaded", "getModContainer", "ModApi"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建软依赖集成",
+      "template": "public class CompatIntegration {\n    public static void init() {\n        if (FabricLoader.getInstance().isModLoaded(\"othermod\")) {\n            // TODO: 集成其他模组\n        }\n    }\n}",
+      "keywords": ["isModLoaded", "@Optional", "try-catch", "Class.forName"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：添加 Mod Menu 支持",
+      "template": "{\n  \"custom\": {\n    \"modmenu\": {\n      \"links\": {\n        \"modmenu.discord\": \"https://discord.gg/xxx\"\n      },\n      \"update_checker\": true\n    }\n  }\n}",
+      "keywords": ["modmenu", "custom", "links", "update_checker", "badges"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：Cloth Config 主要用于什么？",
+      "options": ["A. 创建配置界面", "B. 网络通信", "C. 数据生成", "D. 世界生成"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：Mod Menu 的入口点需要实现哪个接口？",
+      "options": ["A. ModMenuApi", "B. ModInitializer", "C. ClientModInitializer", "D. ConfigScreenFactory"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：fabric.mod.json 中 recommends 字段表示什么？",
+      "options": ["A. 推荐安装", "B. 必须安装", "C. 冲突", "D. 可选"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：检查模组是否加载使用哪个类？",
+      "options": ["A. FabricLoader", "B. ModLoader", "C. Loader", "D. ModContainer"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：配置文件的常见格式有哪些？",
+      "options": ["A. JSON", "B. TOML", "C. YAML", "D. 以上都是"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：@Optional 注解的作用是？",
+      "options": ["A. 标记可选依赖", "B. 标记必需依赖", "C. 标记冲突", "D. 标记版本"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：Mod Menu 的 badges 字段可以设置什么？",
+      "options": ["A. 模组标签", "B. 模组版本", "C. 模组作者", "D. 模组描述"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：软依赖的含义是？",
+      "options": ["A. 模组存在时增强功能，不存在时也能运行", "B. 模组必须存在", "C. 模组不能同时存在", "D. 模组版本必须匹配"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：Cloth Config 的 create 方法需要什么参数？",
+      "options": ["A. 配置文件类", "B. 配置文件名", "C. 配置目录", "D. 配置版本"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：fabric.mod.json 中 breaks 字段表示什么？",
+      "options": ["A. 冲突模组", "B. 依赖模组", "C. 推荐模组", "D. 可选模组"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

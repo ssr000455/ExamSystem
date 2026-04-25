@@ -1,0 +1,124 @@
+{
+  "name": "框题八：兼容性处理",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：检查模组版本",
+      "template": "ModContainer container = FabricLoader.getInstance().getModContainer(\"othermod\").orElse(null);\nif (container != null) {\n    String version = container.getMetadata().getVersion().getFriendlyString();\n    // 检查版本兼容性\n}",
+      "keywords": ["ModContainer", "getModContainer", "getVersion", "getFriendlyString", "compatibility"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：检查 Minecraft 版本",
+      "template": "String minecraftVersion = FabricLoader.getInstance().getModContainer(\"minecraft\").get().getMetadata().getVersion().getFriendlyString();\nif (!minecraftVersion.equals(\"1.20.1\")) {\n    LOGGER.warn(\"模组仅支持 1.20.1，当前版本: {}\", minecraftVersion);\n}",
+      "keywords": ["minecraft", "version", "getFriendlyString", "LOGGER", "warn"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：使用 @Optional 注解",
+      "template": "@Optional\npublic static void callOtherModMethod() {\n    // 仅在 othermod 存在时调用\n}",
+      "keywords": ["@Optional", "annotation", "optional", "dependency", "soft"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：反射调用其他模组",
+      "template": "try {\n    Class<?> clazz = Class.forName(\"com.example.othermod.OtherClass\");\n    Method method = clazz.getMethod(\"someMethod\");\n    method.invoke(null);\n} catch (ClassNotFoundException e) {\n    // 模组不存在\n} catch (Exception e) {\n    e.printStackTrace();\n}",
+      "keywords": ["Class.forName", "反射", "getMethod", "invoke", "ClassNotFoundException"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：版本比较",
+      "template": "public static boolean isVersionCompatible(String current, String required) {\n    String[] currentParts = current.split(\"\\\\.\");\n    String[] requiredParts = required.split(\"\\\\.\");\n    for (int i = 0; i < Math.min(currentParts.length, requiredParts.length); i++) {\n        int cmp = Integer.compare(Integer.parseInt(currentParts[i]), Integer.parseInt(requiredParts[i]));\n        if (cmp != 0) return cmp >= 0;\n    }\n    return currentParts.length >= requiredParts.length;\n}",
+      "keywords": ["version", "compare", "split", "compatible", "semver"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：环境检测",
+      "template": "if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {\n    // 客户端专用代码\n} else {\n    // 服务端专用代码\n}",
+      "keywords": ["EnvironmentType", "CLIENT", "SERVER", "getEnvironmentType", "FabricLoader"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：物理客户端检测",
+      "template": "if (FabricLoader.getInstance().isDevelopmentEnvironment()) {\n    // 开发环境\n} else {\n    // 生产环境\n}",
+      "keywords": ["isDevelopmentEnvironment", "development", "production", "FabricLoader", "environment"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：getModContainer 返回什么类型？",
+      "options": ["A. Optional<ModContainer>", "B. ModContainer", "C. List<ModContainer>", "D. Map<String, ModContainer>"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：@Optional 注解来自哪个包？",
+      "options": ["A. net.fabricmc.loader.api", "B. net.fabricmc.api", "C. net.minecraft.util", "D. com.google.common"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：反射调用时 ClassNotFoundException 表示什么？",
+      "options": ["A. 类不存在", "B. 方法不存在", "C. 参数错误", "D. 权限不足"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：getEnvironmentType() 返回什么？",
+      "options": ["A. EnvType", "B. Environment", "C. Side", "D. Type"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：isDevelopmentEnvironment() 返回 true 表示什么？",
+      "options": ["A. 开发环境", "B. 生产环境", "C. 测试环境", "D. 预发布环境"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：软依赖的含义是什么？",
+      "options": ["A. 模组存在时增强功能，不存在时也能运行", "B. 模组必须存在", "C. 模组不能同时存在", "D. 模组版本必须匹配"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：版本号 1.2.3 中哪一位是次版本号？",
+      "options": ["A. 2", "B. 1", "C. 3", "D. 无"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：EnvType.CLIENT 表示什么？",
+      "options": ["A. 客户端环境", "B. 服务端环境", "C. 开发环境", "D. 生产环境"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：fabric.mod.json 中的 suggests 字段表示什么？",
+      "options": ["A. 建议安装", "B. 必须安装", "C. 冲突", "D. 可选"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：fabric.mod.json 中的 breaks 字段表示什么？",
+      "options": ["A. 冲突模组", "B. 依赖模组", "C. 推荐模组", "D. 可选模组"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

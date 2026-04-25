@@ -1,0 +1,124 @@
+{
+  "name": "框题七：调试与性能",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：使用 Spark 性能分析",
+      "template": "// 在 build.gradle 中添加\nmodImplementation \"spark:spark-fabric:1.10.53\"\n// 命令：/spark profiler start\n// 命令：/spark profiler stop\n// 命令：/spark profiler save",
+      "keywords": ["Spark", "profiler", "performance", "start", "stop"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：使用 Observable 性能监控",
+      "template": "Observable.getProfiler().enable();\n// 运行一段时间后\nObservable.getProfiler().disable();\nObservable.getProfiler().logResults();",
+      "keywords": ["Observable", "getProfiler", "enable", "disable", "logResults"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：内存分析",
+      "template": "// JVM 参数\n-XX:+HeapDumpOnOutOfMemoryError\n-XX:HeapDumpPath=/path/to/dump\n// 使用 VisualVM 或 MAT 分析 heap dump",
+      "keywords": ["HeapDump", "OutOfMemoryError", "VisualVM", "MAT", "memory"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：日志级别配置",
+      "template": "// log4j2.xml\n<Logger name=\"modid\" level=\"DEBUG\" additivity=\"false\">\n    <AppenderRef ref=\"File\"/>\n</Logger>",
+      "keywords": ["log4j2", "Logger", "level", "DEBUG", "AppenderRef"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：性能计数",
+      "template": "long start = System.nanoTime();\n// 代码块\nlong end = System.nanoTime();\nLOGGER.info(\"耗时: {} ns\", end - start);",
+      "keywords": ["System.nanoTime", "性能", "耗时", "LOGGER", "info"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：缓存优化",
+      "template": "private static final Map<String, Object> CACHE = new ConcurrentHashMap<>();\npublic static Object getOrCompute(String key, Supplier<Object> supplier) {\n    return CACHE.computeIfAbsent(key, k -> supplier.get());\n}",
+      "keywords": ["ConcurrentHashMap", "cache", "computeIfAbsent", "Supplier", "optimization"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：异步处理",
+      "template": "CompletableFuture.supplyAsync(() -> {\n    // 耗时操作\n    return result;\n}).thenAccept(result -> {\n    // 使用结果\n});",
+      "keywords": ["CompletableFuture", "supplyAsync", "thenAccept", "async", "thread"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：Spark 模组用于什么？",
+      "options": ["A. 性能分析", "B. 网络通信", "C. 世界生成", "D. 实体渲染"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：Observable 用于什么？",
+      "options": ["A. 性能监控", "B. 数据同步", "C. 事件监听", "D. 网络通信"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：HeapDump 文件用于什么？",
+      "options": ["A. 内存分析", "B. 性能分析", "C. 网络分析", "D. 日志分析"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：LOGGER 的 DEBUG 级别需要什么条件？",
+      "options": ["A. 启用调试级别", "B. 总是输出", "C. 错误时输出", "D. 警告时输出"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：System.nanoTime() 返回什么？",
+      "options": ["A. 纳秒", "B. 毫秒", "C. 微秒", "D. 秒"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：ConcurrentHashMap 适用于什么场景？",
+      "options": ["A. 并发缓存", "B. 单线程缓存", "C. 顺序访问", "D. 只读访问"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：CompletableFuture 用于什么？",
+      "options": ["A. 异步编程", "B. 同步编程", "C. 阻塞编程", "D. 事件编程"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：computeIfAbsent 方法的作用是什么？",
+      "options": ["A. 如果键不存在则计算", "B. 如果键存在则计算", "C. 总是计算", "D. 从不计算"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：性能优化的目标是什么？",
+      "options": ["A. 减少卡顿和提高帧率", "B. 增加代码量", "C. 增加复杂度", "D. 减少功能"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：thenAccept 方法用于什么？",
+      "options": ["A. 消费异步结果", "B. 生产异步结果", "C. 转换异步结果", "D. 取消异步任务"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

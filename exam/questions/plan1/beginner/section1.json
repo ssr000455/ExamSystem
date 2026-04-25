@@ -1,0 +1,124 @@
+{
+  "name": "框题一：物品注册",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建一个名为 'glow_ingot' 的基础物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 注册一个名为 glow_ingot 的物品\n        \n    }\n}",
+      "keywords": ["Registry.register", "Registries.ITEM", "Identifier", "new Item"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建一个自带附魔光泽的物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 创建一个 hasGlint 返回 true 的物品\n        \n    }\n}",
+      "keywords": ["hasGlint", "Item", "Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建一组最大堆叠数为16的物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 设置物品最大堆叠数为16\n        \n    }\n}",
+      "keywords": ["maxCount", "Item.Settings", "16"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建两个物品，并添加到同一个创造模式标签页",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 注册两个物品并添加到自定义物品组\n        \n    }\n}",
+      "keywords": ["ItemGroupEvents", "modifyEntriesEvent", "add"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建一个可堆叠64个但有耐久度的物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 创建有耐久度的物品\n        \n    }\n}",
+      "keywords": ["maxDamage", "maxCount", "Item.Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建一个需要正确工具才能掉落的物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 设置物品需要特定工具\n        \n    }\n}",
+      "keywords": ["requiresTool", "Item.Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建一个防火的物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 设置物品防火属性\n        \n    }\n}",
+      "keywords": ["fireproof", "Item.Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：Fabric 中注册物品使用的注册表类是？",
+      "options": ["A. Registries.ITEM", "B. ItemRegistry", "C. RegistryManager", "D. FabricRegistry"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：Identifier 的完整构造参数是？",
+      "options": ["A. (String namespace, String path)", "B. (String modid, String id)", "C. (String id)", "D. (String name)"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：下列哪个不是 Item.Settings 的方法？",
+      "options": ["A. maxCount()", "B. fireproof()", "C. maxDamage()", "D. addEnchantment()"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：Fabric 模组的主类必须实现哪个接口？",
+      "options": ["A. ModInitializer", "B. ClientModInitializer", "C. DedicatedServerModInitializer", "D. 以上都可以"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：下列哪个用于声明模组 ID？",
+      "options": ["A. fabric.mod.json 中的 id 字段", "B. build.gradle 中的 archives_base_name", "C. settings.gradle 中的 rootProject.name", "D. gradle.properties 中的 mod_version"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：runClient 任务属于哪个构建工具？",
+      "options": ["A. Gradle", "B. Maven", "C. Ant", "D. Make"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：物品的纹理文件应该放在哪个目录？",
+      "options": ["A. assets/modid/textures/item/", "B. assets/minecraft/textures/item/", "C. textures/item/", "D. resources/textures/item/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：物品的模型 JSON 文件中的 parent 字段通常是什么？",
+      "options": ["A. item/generated", "B. item/handheld", "C. builtin/entity", "D. block/cube_all"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：语言文件 en_us.json 中物品名称的翻译键格式是？",
+      "options": ["A. item.modid.item_id", "B. item.modid:item_id", "C. item.item_id", "D. item.modid.item.id"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：Fabric API 的依赖声明在哪个文件中？",
+      "options": ["A. build.gradle", "B. fabric.mod.json", "C. settings.gradle", "D. gradle.properties"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

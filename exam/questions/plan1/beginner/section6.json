@@ -1,0 +1,124 @@
+{
+  "name": "框题六：世界生成与维度",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建一个自定义生物群系",
+      "template": "public class ModBiomes {\n    // TODO: 创建并注册自定义生物群系\n    \n}",
+      "keywords": ["Biome", "Biome.Builder", "Registry.register", "Registries.BIOME"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：配置生物群系的地形生成",
+      "template": "public static Biome createCustomBiome() {\n    // TODO: 配置地形生成参数\n    \n}",
+      "keywords": ["GenerationSettings", "DefaultBiomeFeatures", "addFeature", "GenerationStep"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建自定义维度类型",
+      "template": "{\n  \"type\": \"modid:custom_dimension\",\n  \"generator\": {\n    // TODO: 配置维度生成器\n  }\n}",
+      "keywords": ["dimension_type", "noise", "biome_source", "fixed", "multi_noise"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：注册维度类型",
+      "template": "public class ModDimensions {\n    // TODO: 注册维度类型\n    \n}",
+      "keywords": ["RegistryKey", "RegistryKeys.DIMENSION", "RegistryKeys.DIMENSION_TYPE", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建自定义矿物生成",
+      "template": "{\n  \"type\": \"minecraft:ore\",\n  \"config\": {\n    // TODO: 配置矿物生成\n  }\n}",
+      "keywords": ["configured_feature", "size", "targets", "stone_ore_replaceables", "height_range"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：注册矿物生成到生物群系",
+      "template": "public class OreGeneration {\n    // TODO: 将矿物生成添加到生物群系\n    \n}",
+      "keywords": ["BiomeModifications.addFeature", "GenerationStep.Feature.UNDERGROUND_ORES", "BiomeSelectors"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建自定义结构生成",
+      "template": "public class CustomStructure extends Structure {\n    // TODO: 实现自定义结构\n    \n}",
+      "keywords": ["Structure", "StructureStart", "StructurePiece", "Identifier", "Registry.register"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：生物群系注册使用的注册表类是？",
+      "options": ["A. Registries.BIOME", "B. Registries.WORLD", "C. Registries.DIMENSION", "D. Registries.BIOME_SOURCE"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：维度类型 JSON 文件放在哪个目录？",
+      "options": ["A. data/modid/dimension_type/", "B. data/modid/dimension/", "C. data/minecraft/dimension_type/", "D. assets/modid/dimension/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：矿物生成配置中的 size 参数表示什么？",
+      "options": ["A. 矿脉大小", "B. 矿物数量", "C. 生成高度", "D. 生成概率"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：下列哪个是原版生物群系生成步骤？",
+      "options": ["A. UNDERGROUND_ORES", "B. SURFACE_STRUCTURES", "C. VEGETAL_DECORATION", "D. 以上都是"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：维度类型中的 coordinate_scale 参数在 nether 中的值是多少？",
+      "options": ["A. 8.0", "B. 1.0", "C. 0.125", "D. 16.0"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：结构生成需要注册到哪个注册表？",
+      "options": ["A. Registries.STRUCTURE", "B. Registries.STRUCTURE_TYPE", "C. Registries.FEATURE", "D. Registries.CONFIGURED_FEATURE"],
+      "answer": 1,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：下列哪个不是噪声设置中的参数？",
+      "options": ["A. sea_level", "B. default_block", "C. temperature", "D. noise_router"],
+      "answer": 2,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：矿物生成的放置特征中 count 参数表示什么？",
+      "options": ["A. 每个区块生成次数", "B. 矿脉大小", "C. 生成高度", "D. 生成概率"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：自定义维度中固定生物群系的类型是？",
+      "options": ["A. fixed", "B. multi_noise", "C. checkerboard", "D. the_end"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：世界高度由哪个参数控制？",
+      "options": ["A. height", "B. min_y", "C. logical_height", "D. 以上都是"],
+      "answer": 3,
+      "maxScore": 10
+    }
+  ]
+}

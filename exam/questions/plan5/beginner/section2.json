@@ -1,0 +1,124 @@
+{
+  "name": "框题二：自定义函数",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建 mcfunction 文件",
+      "template": "# 函数文件 example.mcfunction\nsay Hello from custom function!\ngive @s minecraft:diamond 1\neffect give @s minecraft:speed 30 1",
+      "keywords": ["mcfunction", "say", "give", "effect", "execute"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：从代码中调用函数",
+      "template": "Identifier functionId = new Identifier(\"modid\", \"example\");\nserver.getCommandFunctionManager().execute(functionId, source);",
+      "keywords": ["Identifier", "getCommandFunctionManager", "execute", "source", "functionId"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建函数标签",
+      "template": "{\n  \"values\": [\n    \"modid:example\",\n    \"modid:init\"\n  ]\n}",
+      "keywords": ["tags", "functions", "values", "tick", "load"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建 tick 函数",
+      "template": "# tick.mcfunction\nexecute as @e[type=modid:custom_entity] at @s run particle minecraft:heart ~ ~1 ~ 0.5 0.5 0.5 0 5",
+      "keywords": ["tick", "execute", "particle", "heart", "custom_entity"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建 load 函数",
+      "template": "# load.mcfunction\nscoreboard objectives add custom_stat dummy\ntellraw @a [\"\",{\"text\":\"Mod loaded!\",\"color\":\"green\"}]",
+      "keywords": ["load", "scoreboard", "objectives", "tellraw", "loaded"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：函数中使用条件判断",
+      "template": "# conditional.mcfunction\nexecute if score @s custom_stat matches 10.. run say You have 10 or more!\nexecute unless score @s custom_stat matches 10.. run say You have less than 10!",
+      "keywords": ["execute if", "execute unless", "score", "matches", "conditional"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：函数中使用宏",
+      "template": "# macro.mcfunction\ngive @s $item 1\nexecute as @e[type=$entity] run say Hello",
+      "keywords": ["macro", "$item", "$entity", "dynamic", "placeholder"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：mcfunction 文件放在哪个目录？",
+      "options": ["A. data/modid/functions/", "B. assets/modid/functions/", "C. data/minecraft/functions/", "D. functions/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：tick 标签的函数会在什么时候执行？",
+      "options": ["A. 每 tick", "B. 每次加载", "C. 每次命令", "D. 每次死亡"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：load 标签的函数会在什么时候执行？",
+      "options": ["A. 世界加载时", "B. 每 tick", "C. 每次命令", "D. 每次死亡"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：execute if 用于什么？",
+      "options": ["A. 条件执行", "B. 循环执行", "C. 延迟执行", "D. 异步执行"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：函数中的宏使用什么符号？",
+      "options": ["A. $", "B. @", "C. %", "D. &"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：scoreboard objectives 用于什么？",
+      "options": ["A. 创建计分板", "B. 创建队伍", "C. 创建标签", "D. 创建实体"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：tellraw 命令用于什么？",
+      "options": ["A. 发送 JSON 格式消息", "B. 发送普通消息", "C. 发送错误消息", "D. 发送警告消息"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：particle 命令用于什么？",
+      "options": ["A. 生成粒子", "B. 生成实体", "C. 生成方块", "D. 生成音效"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：execute as 用于什么？",
+      "options": ["A. 切换执行者", "B. 切换位置", "C. 切换维度", "D. 切换时间"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：函数文件扩展名是什么？",
+      "options": ["A. .mcfunction", "B. .function", "C. .mc", "D. .txt"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

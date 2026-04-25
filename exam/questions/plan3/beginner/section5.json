@@ -1,0 +1,124 @@
+{
+  "name": "框题五：特征与地表规则",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建树木特征",
+      "template": "public class CustomTreeFeature extends TreeFeature {\n    public CustomTreeFeature(Config config) { super(config); }\n    @Override\n    public boolean generate(FeaturePlacementContext context) {\n        // TODO: 生成自定义树木\n    }\n}",
+      "keywords": ["TreeFeature", "generate", "FeaturePlacementContext", "setBlockState", "Random"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：配置树木特征",
+      "template": "{\n  \"type\": \"minecraft:tree\",\n  \"config\": {\n    \"ignore_vines\": true,\n    \"force_dirt\": false,\n    \"trunk_provider\": {\n      \"type\": \"minecraft:simple_state_provider\",\n      \"state\": {\"Name\": \"minecraft:oak_log\"}\n    },\n    \"leaves_provider\": {\n      \"type\": \"minecraft:simple_state_provider\",\n      \"state\": {\"Name\": \"minecraft:oak_leaves\"}\n    }\n  }\n}",
+      "keywords": ["tree", "trunk_provider", "leaves_provider", "simple_state_provider", "config"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建花丛特征",
+      "template": "{\n  \"type\": \"minecraft:random_patch\",\n  \"config\": {\n    \"tries\": 32,\n    \"xz_spread\": 10,\n    \"y_spread\": 3,\n    \"feature\": \"minecraft:flower_default\"\n  }\n}",
+      "keywords": ["random_patch", "tries", "xz_spread", "y_spread", "feature"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建地表规则",
+      "template": "public class CustomSurfaceRule extends SurfaceRule {\n    @Override\n    public BlockState tryApply(BlockState state, BlockPos pos, Random random, SurfaceContext context) {\n        // TODO: 应用地表规则\n    }\n}",
+      "keywords": ["SurfaceRule", "tryApply", "BlockState", "SurfaceContext", "random"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：配置地表规则 JSON",
+      "template": "{\n  \"type\": \"minecraft:sequence\",\n  \"sequence\": [\n    {\n      \"type\": \"minecraft:condition\",\n      \"condition\": {\"type\": \"minecraft:water\", \"offset\": -1},\n      \"then_run\": {\"type\": \"minecraft:block\", \"result_state\": {\"Name\": \"minecraft:sand\"}}\n    },\n    {\"type\": \"minecraft:block\", \"result_state\": {\"Name\": \"minecraft:grass_block\"}}\n  ]\n}",
+      "keywords": ["sequence", "condition", "water", "then_run", "result_state"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：注册特征",
+      "template": "public static final ConfiguredFeature<?, ?> CUSTOM_TREE = register(\"custom_tree\", Feature.TREE, new TreeFeatureConfig.Builder(...).build());",
+      "keywords": ["ConfiguredFeature", "register", "Feature", "TreeFeatureConfig", "Builder"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：添加特征到生物群系",
+      "template": "BiomeModifications.addFeature(BiomeSelectors.includeByKey(ModBiomes.CUSTOM_BIOME_KEY), GenerationStep.Feature.VEGETAL_DECORATION, new Identifier(\"modid\", \"custom_tree\"));",
+      "keywords": ["BiomeModifications", "addFeature", "BiomeSelectors", "GenerationStep", "VEGETAL_DECORATION"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：树木特征的类型是？",
+      "options": ["A. minecraft:tree", "B. minecraft:forest", "C. minecraft:wood", "D. minecraft:log"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：random_patch 特征通常用于什么？",
+      "options": ["A. 生成随机植被", "B. 生成树木", "C. 生成矿石", "D. 生成结构"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：地表规则中的 sequence 表示什么？",
+      "options": ["A. 顺序执行", "B. 随机执行", "C. 同时执行", "D. 跳过执行"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：condition 中的 water 条件表示什么？",
+      "options": ["A. 水下", "B. 水上", "C. 水边", "D. 水中"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：trunk_provider 的 simple_state_provider 用于什么？",
+      "options": ["A. 指定单个方块", "B. 随机选择方块", "C. 权重选择方块", "D. 标签选择方块"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：GenerationStep.Feature.VEGETAL_DECORATION 表示什么生成阶段？",
+      "options": ["A. 植被装饰", "B. 地下矿石", "C. 地表结构", "D. 流体生成"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：特征配置中的 tries 参数表示什么？",
+      "options": ["A. 尝试次数", "B. 成功次数", "C. 失败次数", "D. 重试次数"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：地表规则的 ConditionSurfaceRule 需要什么参数？",
+      "options": ["A. 条件 和 规则", "B. 规则 和 条件", "C. 条件和方块", "D. 方块和规则"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：xz_spread 参数控制什么？",
+      "options": ["A. 水平扩散范围", "B. 垂直扩散范围", "C. 生成数量", "D. 生成概率"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：ConfiguredFeature 注册使用的注册表是？",
+      "options": ["A. Registries.CONFIGURED_FEATURE", "B. Registries.FEATURE", "C. Registries.PLACED_FEATURE", "D. Registries.BIOME"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "name": "框题五：自定义酿造配方",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建药水效果",
+      "template": "public class ModEffects {\n    public static final StatusEffect CUSTOM_EFFECT = new StatusEffect(StatusEffectCategory.BENEFICIAL, 0x00FF00);\n    public static void register() {\n        Registry.register(Registries.STATUS_EFFECT, new Identifier(\"modid\", \"custom_effect\"), CUSTOM_EFFECT);\n    }\n}",
+      "keywords": ["StatusEffect", "StatusEffectCategory", "BENEFICIAL", "Registry.register", "Registries.STATUS_EFFECT"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：实现药水效果逻辑",
+      "template": "@Override\npublic boolean canApplyUpdateEffect(int duration, int amplifier) {\n    return true;\n}\n@Override\npublic void applyUpdateEffect(LivingEntity entity, int amplifier) {\n    entity.heal(2.0f);\n}",
+      "keywords": ["canApplyUpdateEffect", "applyUpdateEffect", "duration", "amplifier", "heal"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：注册药水类型",
+      "template": "public class ModPotions {\n    public static final Potion CUSTOM_POTION = new Potion(new StatusEffectInstance(ModEffects.CUSTOM_EFFECT, 3600, 0));\n    public static void register() {\n        Registry.register(Registries.POTION, new Identifier(\"modid\", \"custom_potion\"), CUSTOM_POTION);\n    }\n}",
+      "keywords": ["Potion", "StatusEffectInstance", "Registry.register", "Registries.POTION", "duration"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：注册药水瓶物品",
+      "template": "public static final Item CUSTOM_POTION_ITEM = new PotionItem(new FabricItemSettings());\nRegistry.register(Registries.ITEM, new Identifier(\"modid\", \"custom_potion\"), CUSTOM_POTION_ITEM);",
+      "keywords": ["PotionItem", "FabricItemSettings", "Registry.register", "Registries.ITEM", "maxCount"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建酿造配方",
+      "template": "{\n  \"type\": \"minecraft:brewing\",\n  \"ingredient\": {\"item\": \"modid:custom_ingredient\"},\n  \"input\": {\"item\": \"minecraft:awkward_potion\"},\n  \"result\": {\"item\": \"modid:custom_potion\"}\n}",
+      "keywords": ["brewing", "ingredient", "input", "result", "awkward_potion"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建可酿造的原料",
+      "template": "public static final Item CUSTOM_BREWING_INGREDIENT = new Item(new FabricItemSettings());\nRegistry.register(Registries.ITEM, new Identifier(\"modid\", \"custom_ingredient\"), CUSTOM_BREWING_INGREDIENT);",
+      "keywords": ["brewing", "ingredient", "Item", "FabricItemSettings", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：添加药水效果语言文件",
+      "template": "{\n  \"effect.modid.custom_effect\": \"Custom Effect\",\n  \"item.modid.custom_potion\": \"Custom Potion\",\n  \"item.modid.custom_potion.effect.custom\": \"Custom Potion\"\n}",
+      "keywords": ["effect", "potion", "lang", "translation", "effect.modid"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：药水效果注册使用的注册表是？",
+      "options": ["A. Registries.STATUS_EFFECT", "B. Registries.POTION", "C. Registries.ITEM", "D. Registries.BLOCK"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：药水类型注册使用的注册表是？",
+      "options": ["A. Registries.POTION", "B. Registries.STATUS_EFFECT", "C. Registries.ITEM", "D. Registries.BLOCK"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：StatusEffectCategory.BENEFICIAL 表示什么？",
+      "options": ["A. 增益效果", "B. 减益效果", "C. 中性效果", "D. 隐藏效果"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：canApplyUpdateEffect 返回 true 表示什么？",
+      "options": ["A. 每 tick 应用效果", "B. 每秒应用效果", "C. 不应用效果", "D. 只应用一次"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：酿造配方文件放在哪个目录？",
+      "options": ["A. data/modid/recipes/", "B. data/minecraft/recipes/", "C. assets/modid/recipes/", "D. recipes/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：awkward_potion 是什么？",
+      "options": ["A. 粗制药水", "B. 普通药水", "C. 喷溅药水", "D. 滞留药水"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：药水效果的持续时间单位是？",
+      "options": ["A. tick", "B. 秒", "C. 毫秒", "D. 分钟"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：喷溅药水的物品类是什么？",
+      "options": ["A. SplashPotionItem", "B. LingeringPotionItem", "C. PotionItem", "D. ThrowablePotionItem"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：滞留药水的物品类是什么？",
+      "options": ["A. LingeringPotionItem", "B. SplashPotionItem", "C. PotionItem", "D. ThrowablePotionItem"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：药水效果的颜色值使用什么格式？",
+      "options": ["A. 十六进制RGB", "B. 十进制RGB", "C. 十六进制RGBA", "D. 字符串"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}
