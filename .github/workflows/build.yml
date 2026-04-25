@@ -1,0 +1,53 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compile and package JAR
+        run: |
+          cd exam
+          javac -cp "lib/*" -d . src/Main.java
+          jar cfe ExamSystem.jar ui.MainFrame -C . .
+
+      - name: Prepare distribution folder
+        run: |
+          mkdir dist
+          cp exam/ExamSystem.jar dist/
+          cp -r exam/lib dist/
+          cp -r exam/questions dist/
+          cp -r exam/models dist/
+          cp -r exam/scenes dist/
+          cp exam/README_*.md dist/ 2>nul || echo "No README files"
+          rm -f dist/start-exam.sh
+
+      - name: Build EXE with jpackage
+        run: |
+          jpackage `
+            --type exe `
+            --name ExamSystem `
+            --input dist `
+            --main-jar ExamSystem.jar `
+            --main-class ui.MainFrame `
+            --dest installer
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExamSystem-Setup
+          path: installer/*.exe
