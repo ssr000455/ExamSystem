@@ -1,0 +1,124 @@
+{
+  "name": "框题二：方块注册",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建一个基础方块并注册",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 注册一个基础方块\n        \n    }\n}",
+      "keywords": ["Registry.register", "Registries.BLOCK", "Block", "AbstractBlock.Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建一个方块并注册对应的方块物品",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 注册方块和方块物品\n        \n    }\n}",
+      "keywords": ["BlockItem", "Registry.register", "Registries.ITEM"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建一个需要镐挖掘的方块",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 设置方块需要镐挖掘\n        \n    }\n}",
+      "keywords": ["requiresTool", "strength", "AbstractBlock.Settings"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建一个有方向性的方块（朝向玩家）",
+      "template": "public class CustomBlock extends Block {\n    // TODO: 实现方向性\n    \n}",
+      "keywords": ["FACING", "HorizontalFacingBlock", "getPlacementState", "appendProperties"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建一个会发光的方块",
+      "template": "public class ExampleMod implements ModInitializer {\n    @Override\n    public void onInitialize() {\n        // TODO: 设置方块发光等级\n        \n    }\n}",
+      "keywords": ["luminance", "AbstractBlock.Settings", "15"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建一个透明方块（不完整碰撞箱）",
+      "template": "public class CustomBlock extends Block {\n    @Override\n    public VoxelShape getOutlineShape(...) {\n        // TODO: 返回自定义碰撞箱\n        \n    }\n}",
+      "keywords": ["getOutlineShape", "VoxelShape", "cuboid"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建一个可互动的方块（右键打开GUI）",
+      "template": "public class CustomBlock extends Block {\n    @Override\n    public ActionResult onUse(...) {\n        // TODO: 实现右键交互\n        \n    }\n}",
+      "keywords": ["onUse", "ActionResult", "player.openHandledScreen"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：方块注册使用的注册表类是？",
+      "options": ["A. Registries.BLOCK", "B. Registries.ITEM", "C. Registries.BLOCK_ENTITY", "D. Registries.BLOCK_STATE"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：方块物品的注册与普通物品有何不同？",
+      "options": ["A. 需要额外注册 BlockItem", "B. 不需要注册", "C. 使用不同的注册表", "D. 自动注册"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：AbstractBlock.Settings.create().strength(2.0f, 3.0f) 中两个参数分别代表？",
+      "options": ["A. 硬度, 抗爆炸性", "B. 抗爆炸性, 硬度", "C. 挖掘等级, 硬度", "D. 硬度, 挖掘等级"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：下列哪个方法用于设置方块的发光等级？",
+      "options": ["A. luminance()", "B. lightLevel()", "C. emissiveLighting()", "D. getLuminance()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：方块状态 JSON 文件放在哪个目录？",
+      "options": ["A. assets/modid/blockstates/", "B. assets/modid/models/block/", "C. assets/modid/block/", "D. data/modid/blockstates/"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：下列哪个不是 Block 类的方法？",
+      "options": ["A. onUse()", "B. onSteppedOn()", "C. onEntityCollision()", "D. onItemUse()"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：方块模型 JSON 文件中的 parent 字段通常是什么？",
+      "options": ["A. block/cube_all", "B. item/generated", "C. builtin/entity", "D. block/cube"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：方块实体需要注册到哪个注册表？",
+      "options": ["A. Registries.BLOCK_ENTITY_TYPE", "B. Registries.BLOCK", "C. Registries.BLOCK_ENTITY", "D. Registries.TILE_ENTITY"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：下列哪个用于设置方块是否需要正确工具？",
+      "options": ["A. requiresTool()", "B. needsTool()", "C. toolRequired()", "D. requiresCorrectTool()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：方块的掉落战利品表文件放在哪个目录？",
+      "options": ["A. data/modid/loot_tables/blocks/", "B. data/minecraft/loot_tables/blocks/", "C. assets/modid/loot_tables/", "D. data/modid/loot_tables/"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

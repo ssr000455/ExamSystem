@@ -1,0 +1,75 @@
+{
+  "name": "框题一：性能优化",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：使用缓存优化重复计算",
+      "template": "public class CacheManager {\n    private static final Map<String, Object> CACHE = new ConcurrentHashMap<>();\n    \n    public static Object getOrCompute(String key, Supplier<Object> supplier) {\n        // TODO: 实现缓存逻辑\n        return null;\n    }\n}",
+      "keywords": ["ConcurrentHashMap", "computeIfAbsent", "Supplier", "cache", "get"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：优化循环和遍历",
+      "template": "public class LoopOptimizer {\n    public void processList(List<ItemStack> items) {\n        // TODO: 使用增强for循环或forEach优化\n        \n    }\n}",
+      "keywords": ["for", "forEach", "Iterator", "size", "ItemStack"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：减少对象创建",
+      "template": "public class ObjectPool<T> {\n    private final Queue<T> pool = new ArrayDeque<>();\n    private final Supplier<T> factory;\n    \n    public ObjectPool(Supplier<T> factory, int initialSize) {\n        this.factory = factory;\n        // TODO: 初始化对象池\n    }\n    \n    public T borrow() {\n        // TODO: 从池中获取对象\n        return null;\n    }\n    \n    public void release(T obj) {\n        // TODO: 归还对象到池\n    }\n}",
+      "keywords": ["ObjectPool", "Queue", "ArrayDeque", "borrow", "release"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：异步任务处理",
+      "template": "public class AsyncProcessor {\n    private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(4);\n    \n    public static CompletableFuture<String> processAsync(String input) {\n        // TODO: 异步处理任务\n        return null;\n    }\n    \n    public static void shutdown() {\n        // TODO: 正确关闭线程池\n    }\n}",
+      "keywords": ["ExecutorService", "CompletableFuture", "supplyAsync", "shutdown", "thread"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：延迟加载",
+      "template": "public class LazyLoader<T> {\n    private volatile T instance;\n    private final Supplier<T> loader;\n    \n    public LazyLoader(Supplier<T> loader) {\n        this.loader = loader;\n    }\n    \n    public T get() {\n        // TODO: 双重检查锁实现延迟加载\n        return null;\n    }\n}",
+      "keywords": ["volatile", "synchronized", "double-checked", "null", "Supplier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：批量处理优化",
+      "template": "public class BatchProcessor<T> {\n    private final List<T> buffer = new ArrayList<>();\n    private final int batchSize;\n    \n    public BatchProcessor(int batchSize) {\n        this.batchSize = batchSize;\n    }\n    \n    public void add(T item) {\n        // TODO: 添加到缓冲区，达到批量大小时处理\n    }\n    \n    private void processBatch() {\n        // TODO: 批量处理\n    }\n}",
+      "keywords": ["batch", "buffer", "ArrayList", "size", "clear"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：内存泄漏检测",
+      "template": "public class MemoryMonitor {\n    private static final Runtime runtime = Runtime.getRuntime();\n    \n    public static void logMemoryUsage() {\n        // TODO: 记录内存使用情况\n    }\n    \n    public static void suggestGC() {\n        // TODO: 建议垃圾回收\n    }\n}",
+      "keywords": ["Runtime", "totalMemory", "freeMemory", "gc", "maxMemory"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：ConcurrentHashMap 适用于什么场景？",
+      "options": ["A. 高并发读写", "B. 单线程读写", "C. 只读场景", "D. 顺序访问"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：以下哪个是避免内存泄漏的正确做法？",
+      "options": ["A. 及时移除事件监听器", "B. 使用静态集合存储所有对象", "C. 不调用 System.gc()", "D. 永远不关闭资源"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：对象池的主要目的是什么？",
+      "options": ["A. 减少对象创建开销", "B. 增加对象数量", "C. 加快垃圾回收", "D. 增加内存使用"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

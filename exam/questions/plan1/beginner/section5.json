@@ -1,0 +1,124 @@
+{
+  "name": "框题五：实体与AI",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建一个基础实体类",
+      "template": "public class CustomEntity extends LivingEntity {\n    // TODO: 实现基础实体\n    \n}",
+      "keywords": ["LivingEntity", "EntityType", "createAttributes", "initGoals"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册实体类型",
+      "template": "public class ModEntities {\n    // TODO: 注册实体类型\n    \n}",
+      "keywords": ["FabricEntityTypeBuilder", "Registry.register", "Registries.ENTITY_TYPE"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建实体渲染器",
+      "template": "public class CustomEntityRenderer extends MobEntityRenderer<CustomEntity, CustomEntityModel> {\n    // TODO: 实现实体渲染器\n    \n}",
+      "keywords": ["MobEntityRenderer", "getTexture", "EntityRendererRegistry", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：添加实体AI目标",
+      "template": "public class CustomEntity extends HostileEntity {\n    @Override\n    protected void initGoals() {\n        // TODO: 添加AI目标\n        \n    }\n}",
+      "keywords": ["goalSelector", "targetSelector", "MeleeAttackGoal", "ActiveTargetGoal", "WanderAroundGoal"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建实体属性（生命值、攻击力、速度）",
+      "template": "public class CustomEntity extends HostileEntity {\n    public static DefaultAttributeContainer.Builder createAttributes() {\n        // TODO: 设置实体属性\n        \n    }\n}",
+      "keywords": ["GENERIC_MAX_HEALTH", "GENERIC_ATTACK_DAMAGE", "GENERIC_MOVEMENT_SPEED", "FabricDefaultAttributeRegistry"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：添加实体自然生成规则",
+      "template": "public class ModEntities {\n    public static void registerSpawns() {\n        // TODO: 配置实体生成\n        \n    }\n}",
+      "keywords": ["SpawnRestriction", "BiomeModifications.addSpawn", "SpawnGroup", "Heightmap"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建刷怪蛋物品",
+      "template": "public class ModItems {\n    // TODO: 注册刷怪蛋\n    \n}",
+      "keywords": ["SpawnEggItem", "FabricItemSettings", "Registry.register", "Registries.ITEM"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：实体注册使用的注册表类是？",
+      "options": ["A. Registries.ENTITY_TYPE", "B. Registries.ENTITY", "C. Registries.ENTITY_RENDERER", "D. Registries.LIVING_ENTITY"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：下列哪个不是 HostileEntity 的 AI 目标？",
+      "options": ["A. BreedGoal", "B. MeleeAttackGoal", "C. ActiveTargetGoal", "D. SwimGoal"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：实体渲染器应该在哪个端注册？",
+      "options": ["A. 客户端", "B. 服务端", "C. 两端都需要", "D. 任意一端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：下列哪个方法用于设置实体攻击目标？",
+      "options": ["A. targetSelector", "B. goalSelector", "C. setTarget", "D. getTarget"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：实体属性的注册使用哪个类？",
+      "options": ["A. FabricDefaultAttributeRegistry", "B. AttributeRegistry", "C. EntityAttributeRegistry", "D. DefaultAttributeRegistry"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：SpawnRestriction.Location.ON_GROUND 表示什么？",
+      "options": ["A. 在地面上生成", "B. 在水中生成", "C. 在空气中生成", "D. 在洞穴中生成"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：实体 NBT 数据保存需要重写哪两个方法？",
+      "options": ["A. writeCustomDataToNbt / readCustomDataFromNbt", "B. writeNbt / readNbt", "C. toNbt / fromNbt", "D. serialize / deserialize"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：下列哪个不是 SpawnGroup 的类型？",
+      "options": ["A. MONSTER", "B. CREATURE", "C. AMBIENT", "D. BOSS"],
+      "answer": 3,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：实体模型通常使用什么工具创建？",
+      "options": ["A. Blockbench", "B. Blender", "C. Maya", "D. 3ds Max"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：实体渲染器中的 getTexture 方法返回什么？",
+      "options": ["A. Identifier", "B. String", "C. Texture", "D. ResourceLocation"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

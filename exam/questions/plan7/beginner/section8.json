@@ -1,0 +1,124 @@
+{
+  "name": "框题八：API设计模式",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建服务提供者接口",
+      "template": "public interface CustomService {\n    void initialize();\n    void shutdown();\n    boolean isAvailable();\n    \n    static CustomService getInstance() {\n        return FabricLoader.getInstance().getEntrypoints(\"custom-service\", CustomService.class)\n            .stream()\n            .findFirst()\n            .orElseThrow(() -> new IllegalStateException(\"No CustomService implementation found\"));\n    }\n}",
+      "keywords": ["interface", "getInstance", "FabricLoader", "getEntrypoints", "Service"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：实现单例模式",
+      "template": "public class SingletonManager {\n    private static volatile SingletonManager instance;\n    private final Map<String, Object> data = new ConcurrentHashMap<>();\n    \n    private SingletonManager() {}\n    \n    public static SingletonManager getInstance() {\n        if (instance == null) {\n            synchronized (SingletonManager.class) {\n                if (instance == null) {\n                    instance = new SingletonManager();\n                }\n            }\n        }\n        return instance;\n    }\n}",
+      "keywords": ["Singleton", "volatile", "synchronized", "double-checked locking", "getInstance"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：实现工厂模式",
+      "template": "public interface ItemFactory {\n    Item create(Item.Settings settings);\n    \n    class SwordFactory implements ItemFactory {\n        private final ToolMaterial material;\n        public SwordFactory(ToolMaterial material) { this.material = material; }\n        @Override\n        public Item create(Item.Settings settings) {\n            return new SwordItem(material, 3, -2.4f, settings);\n        }\n    }\n    \n    class PickaxeFactory implements ItemFactory {\n        private final ToolMaterial material;\n        public PickaxeFactory(ToolMaterial material) { this.material = material; }\n        @Override\n        public Item create(Item.Settings settings) {\n            return new PickaxeItem(material, 1, -2.8f, settings);\n        }\n    }\n}",
+      "keywords": ["Factory", "create", "ItemFactory", "SwordFactory", "PickaxeFactory"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：实现建造者模式",
+      "template": "public class CustomItemBuilder {\n    private int maxCount = 64;\n    private boolean fireproof = false;\n    private FoodComponent foodComponent = null;\n    private Rarity rarity = Rarity.COMMON;\n    \n    public CustomItemBuilder maxCount(int maxCount) { this.maxCount = maxCount; return this; }\n    public CustomItemBuilder fireproof() { this.fireproof = true; return this; }\n    public CustomItemBuilder food(FoodComponent food) { this.foodComponent = food; return this; }\n    public CustomItemBuilder rarity(Rarity rarity) { this.rarity = rarity; return this; }\n    \n    public Item build() {\n        Item.Settings settings = new Item.Settings().maxCount(maxCount).rarity(rarity);\n        if (fireproof) settings = settings.fireproof();\n        if (foodComponent != null) settings = settings.food(foodComponent);\n        return new Item(settings);\n    }\n}",
+      "keywords": ["Builder", "fluent interface", "build", "chain", "method chaining"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：实现观察者模式",
+      "template": "public class EventBus<T> {\n    private final List<Consumer<T>> listeners = new CopyOnWriteArrayList<>();\n    \n    public void register(Consumer<T> listener) {\n        listeners.add(listener);\n    }\n    \n    public void unregister(Consumer<T> listener) {\n        listeners.remove(listener);\n    }\n    \n    public void post(T event) {\n        for (Consumer<T> listener : listeners) {\n            listener.accept(event);\n        }\n    }\n}",
+      "keywords": ["Observer", "EventBus", "register", "unregister", "post"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：实现适配器模式",
+      "template": "public class EnergyAdapter {\n    public interface EnergyStorage {\n        int getEnergy();\n        int getMaxEnergy();\n        void setEnergy(int energy);\n    }\n    \n    public static class ItemStackEnergyAdapter implements EnergyStorage {\n        private final ItemStack stack;\n        \n        public ItemStackEnergyAdapter(ItemStack stack) {\n            this.stack = stack;\n        }\n        \n        @Override\n        public int getEnergy() {\n            return stack.getOrDefault(ModDataComponentTypes.ENERGY, 0);\n        }\n        \n        @Override\n        public int getMaxEnergy() {\n            return stack.getOrDefault(ModDataComponentTypes.MAX_ENERGY, 1000);\n        }\n        \n        @Override\n        public void setEnergy(int energy) {\n            stack.set(ModDataComponentTypes.ENERGY, Math.min(energy, getMaxEnergy()));\n        }\n    }\n}",
+      "keywords": ["Adapter", "interface", "wrapper", "adapt", "convert"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：实现策略模式",
+      "template": "public interface DamageStrategy {\n    float calculateDamage(LivingEntity attacker, LivingEntity target, float baseDamage);\n    \n    class CriticalStrategy implements DamageStrategy {\n        @Override\n        public float calculateDamage(LivingEntity attacker, LivingEntity target, float baseDamage) {\n            return attacker.getRandom().nextFloat() < 0.2f ? baseDamage * 2 : baseDamage;\n        }\n    }\n    \n    class ElementalStrategy implements DamageStrategy {\n        @Override\n        public float calculateDamage(LivingEntity attacker, LivingEntity target, float baseDamage) {\n            if (target.isOnFire()) return baseDamage * 1.5f;\n            return baseDamage;\n        }\n    }\n}",
+      "keywords": ["Strategy", "calculateDamage", "interface", "algorithm", "behavior"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：服务提供者模式的主要优势是什么？",
+      "options": ["A. 解耦接口和实现", "B. 提高性能", "C. 减少代码量", "D. 简化调试"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：单例模式的getInstance方法通常声明为什么？",
+      "options": ["A. static", "B. public", "C. synchronized", "D. final"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：工厂模式主要用于什么？",
+      "options": ["A. 创建对象", "B. 销毁对象", "C. 复制对象", "D. 修改对象"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：建造者模式中的方法链（method chaining）如何实现？",
+      "options": ["A. 每个方法返回this", "B. 每个方法返回void", "C. 每个方法返回新对象", "D. 每个方法返回null"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：观察者模式中的post方法通常做什么？",
+      "options": ["A. 通知所有监听器", "B. 添加监听器", "C. 删除监听器", "D. 创建监听器"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：CopyOnWriteArrayList适用于什么场景？",
+      "options": ["A. 读多写少的并发场景", "B. 写多读少的场景", "C. 单线程场景", "D. 大量写入场景"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：适配器模式的作用是什么？",
+      "options": ["A. 转换接口", "B. 创建对象", "C. 定义算法", "D. 管理状态"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：策略模式中各个策略之间的关系是？",
+      "options": ["A. 可互换", "B. 继承关系", "C. 包含关系", "D. 依赖关系"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：volatile关键字的作用是什么？",
+      "options": ["A. 保证内存可见性", "B. 保证原子性", "C. 保证有序性", "D. 保证不可变性"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：FabricLoader.getInstance().getEntrypoints用于什么？",
+      "options": ["A. 获取入口点实现", "B. 获取模组列表", "C. 获取配置", "D. 获取依赖"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

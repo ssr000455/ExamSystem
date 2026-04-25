@@ -1,0 +1,124 @@
+{
+  "name": "框题八：API 与扩展",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建公开 API 接口",
+      "template": "public interface ModApi {\n    // TODO: 定义 API 方法\n    ItemStack getCustomItem();\n}",
+      "keywords": ["interface", "API", "public", "method", "return"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：实现 API 接口",
+      "template": "public class ModApiImpl implements ModApi {\n    @Override\n    public ItemStack getCustomItem() {\n        // TODO: 实现 API 方法\n    }\n}",
+      "keywords": ["implements", "@Override", "implementation", "instance", "return"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：注册 API 服务",
+      "template": "public class ModApiService {\n    public static void register() {\n        // TODO: 注册 API 服务\n    }\n}",
+      "keywords": ["FabricLoader", "registerService", "ModApi", "getInstance"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：从其他模组获取 API",
+      "template": "public class ApiConsumer {\n    public void useApi() {\n        // TODO: 获取并使用其他模组的 API\n    }\n}",
+      "keywords": ["FabricLoader.getInstance().getModContainer", "find", "api", "cast"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建事件 API",
+      "template": "public interface CustomEvent {\n    Event<CustomEvent> EVENT = EventFactory.createArrayBacked(CustomEvent.class,\n        listeners -> (player) -> {\n            for (CustomEvent listener : listeners) {\n                listener.onEvent(player);\n            }\n        });\n    void onEvent(PlayerEntity player);\n}",
+      "keywords": ["Event", "EventFactory", "createArrayBacked", "invoker", "register"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：触发自定义事件",
+      "template": "public class EventTrigger {\n    public void trigger(PlayerEntity player) {\n        // TODO: 触发自定义事件\n    }\n}",
+      "keywords": ["CustomEvent.EVENT", "invoker", "onEvent", "call", "trigger"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：监听自定义事件",
+      "template": "public class EventListener {\n    public void register() {\n        // TODO: 监听自定义事件\n    }\n}",
+      "keywords": ["CustomEvent.EVENT.register", "listener", "lambda", "callback", "handle"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：API 的全称是什么？",
+      "options": ["A. Application Programming Interface", "B. Application Program Interface", "C. Applied Programming Interface", "D. Advanced Programming Interface"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：Fabric 中注册 API 服务使用哪个类？",
+      "options": ["A. FabricLoader", "B. ModLoader", "C. ServiceLoader", "D. ApiLoader"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：事件工厂使用哪个方法创建？",
+      "options": ["A. EventFactory.createArrayBacked", "B. EventFactory.create", "C. EventFactory.newEvent", "D. EventFactory.build"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：API 版本应该遵循什么规范？",
+      "options": ["A. 语义化版本", "B. 时间戳版本", "C. 随机版本", "D. 哈希版本"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：从其他模组获取 API 实例使用哪个方法？",
+      "options": ["A. getModContainer", "B. getApiInstance", "C. getModApi", "D. getApi"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：自定义事件的触发使用哪个方法？",
+      "options": ["A. invoker().onEvent()", "B. trigger().onEvent()", "C. call().onEvent()", "D. fire().onEvent()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：API 设计的原则不包括？",
+      "options": ["A. 稳定性", "B. 文档完整", "C. 频繁变更", "D. 向后兼容"],
+      "answer": 2,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：监听自定义事件使用哪个方法？",
+      "options": ["A. EVENT.register()", "B. EVENT.addListener()", "C. EVENT.subscribe()", "D. EVENT.on()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：API 接口应该放在哪个包？",
+      "options": ["A. api 包", "B. impl 包", "C. internal 包", "D. client 包"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：事件监听器可以注册多个吗？",
+      "options": ["A. 可以", "B. 不可以", "C. 最多2个", "D. 最多5个"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

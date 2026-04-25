@@ -1,0 +1,124 @@
+{
+  "name": "框题五：自定义结构处理器",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建结构处理器",
+      "template": "public class CustomStructureProcessor extends StructureProcessor {\n    @Override\n    public StructureTemplate.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo currentBlockInfo, StructurePlacementData data) {\n        return currentBlockInfo;\n    }\n}",
+      "keywords": ["StructureProcessor", "process", "WorldView", "StructureTemplate", "StructurePlacementData"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册结构处理器",
+      "template": "public static final StructureProcessorType<CustomStructureProcessor> CUSTOM = register(\"custom\", CustomStructureProcessor.CODEC);\nprivate static <P extends StructureProcessor> StructureProcessorType<P> register(String id, Codec<P> codec) {\n    return Registry.register(Registries.STRUCTURE_PROCESSOR, new Identifier(\"modid\", id), () -> codec);\n}",
+      "keywords": ["StructureProcessorType", "Registry.register", "Registries.STRUCTURE_PROCESSOR", "Codec", "Identifier"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：在处理器中替换方块",
+      "template": "if (currentBlockInfo.state().isOf(Blocks.STONE_BRICKS)) {\n    return new StructureTemplate.StructureBlockInfo(currentBlockInfo.pos(), Blocks.MOSSY_STONE_BRICKS.getDefaultState(), currentBlockInfo.nbt());\n}",
+      "keywords": ["isOf", "STONE_BRICKS", "MOSSY_STONE_BRICKS", "getDefaultState", "StructureBlockInfo"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：在处理器中随机替换",
+      "template": "if (currentBlockInfo.state().isOf(Blocks.STONE_BRICKS)) {\n    if (random.nextFloat() < 0.3f) {\n        return new StructureTemplate.StructureBlockInfo(currentBlockInfo.pos(), Blocks.CRACKED_STONE_BRICKS.getDefaultState(), currentBlockInfo.nbt());\n    }\n}",
+      "keywords": ["random", "nextFloat", "probability", "CRACKED_STONE_BRICKS", "random"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：在处理器中添加战利品箱",
+      "template": "if (currentBlockInfo.state().isOf(Blocks.CHEST)) {\n    NbtCompound nbt = currentBlockInfo.nbt();\n    if (nbt == null) nbt = new NbtCompound();\n    nbt.putString(\"LootTable\", \"modid:chests/custom_loot\");\n    return new StructureTemplate.StructureBlockInfo(currentBlockInfo.pos(), currentBlockInfo.state(), nbt);\n}",
+      "keywords": ["CHEST", "LootTable", "NbtCompound", "custom_loot", "StructureBlockInfo"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：在处理器中移除方块",
+      "template": "if (currentBlockInfo.state().isOf(Blocks.TORCH)) {\n    return null;\n}",
+      "keywords": ["TORCH", "return null", "remove", "block", "processor"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：在结构 JSON 中使用处理器",
+      "template": "\"processors\": \"modid:custom_processor\"",
+      "keywords": ["processors", "modid:custom_processor", "structure", "json", "processor"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：StructureProcessor 需要实现哪个方法？",
+      "options": ["A. process", "B. apply", "C. transform", "D. modify"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：process 方法返回 null 表示什么？",
+      "options": ["A. 移除该方块", "B. 保留原方块", "C. 替换为空气", "D. 报错"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：StructureProcessor 注册使用的注册表是？",
+      "options": ["A. Registries.STRUCTURE_PROCESSOR", "B. Registries.BLOCK", "C. Registries.ITEM", "D. Registries.ENTITY"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：Codec 用于什么？",
+      "options": ["A. 序列化", "B. 网络通信", "C. 数据存储", "D. 加密"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：random.nextFloat() 返回的范围是？",
+      "options": ["A. 0.0-1.0", "B. 0-1", "C. 0.0-0.9", "D. 0.1-1.0"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：原版结构处理器 rule 用于什么？",
+      "options": ["A. 规则替换", "B. 随机替换", "C. 条件替换", "D. 全部替换"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：StructureBlockInfo 包含哪些信息？",
+      "options": ["A. 位置、状态、NBT", "B. 仅位置", "C. 仅状态", "D. 仅NBT"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：处理器中的 random 参数从哪里获取？",
+      "options": ["A. data.getRandom()", "B. world.getRandom()", "C. pos.getRandom()", "D. context.getRandom()"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：isOf 方法用于什么？",
+      "options": ["A. 判断方块类型", "B. 判断方块状态", "C. 判断方块位置", "D. 判断方块NBT"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：原版 processors 中的 empty 表示什么？",
+      "options": ["A. 不处理", "B. 删除所有", "C. 随机处理", "D. 条件处理"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

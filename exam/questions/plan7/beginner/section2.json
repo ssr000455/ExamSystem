@@ -1,0 +1,124 @@
+{
+  "name": "框题二：自定义渲染器",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建自定义HUD渲染器",
+      "template": "public class CustomHudRenderer {\n    public static void register() {\n        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {\n            MinecraftClient client = MinecraftClient.getInstance();\n            if (client.player == null) return;\n            // TODO: 渲染自定义HUD元素\n            drawContext.drawText(client.textRenderer, \"Custom HUD\", 10, 10, 0xFFFFFF, true);\n        });\n    }\n}",
+      "keywords": ["HudRenderCallback", "EVENT", "drawContext", "drawText", "tickDelta"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建世界渲染器",
+      "template": "public class CustomWorldRenderer {\n    public static void register() {\n        WorldRenderEvents.AFTER_ENTITIES.register(context -> {\n            MatrixStack matrices = context.matrixStack();\n            VertexConsumerProvider consumers = context.consumers();\n            // TODO: 在世界中渲染自定义图形\n        });\n    }\n}",
+      "keywords": ["WorldRenderEvents", "AFTER_ENTITIES", "MatrixStack", "VertexConsumerProvider", "render"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：渲染自定义线条",
+      "template": "public static void renderLine(MatrixStack matrices, VertexConsumerProvider consumers, Vec3d start, Vec3d end, int color) {\n    VertexConsumer vertexConsumer = consumers.getBuffer(RenderLayer.getLines());\n    Matrix4f positionMatrix = matrices.peek().getPositionMatrix();\n    float red = ((color >> 16) & 0xFF) / 255.0f;\n    float green = ((color >> 8) & 0xFF) / 255.0f;\n    float blue = (color & 0xFF) / 255.0f;\n    vertexConsumer.vertex(positionMatrix, (float)start.x, (float)start.y, (float)start.z).color(red, green, blue, 1.0f).normal(0, 1, 0).next();\n    vertexConsumer.vertex(positionMatrix, (float)end.x, (float)end.y, (float)end.z).color(red, green, blue, 1.0f).normal(0, 1, 0).next();\n}",
+      "keywords": ["VertexConsumer", "RenderLayer", "getLines", "vertex", "color"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：渲染半透明方块轮廓",
+      "template": "public static void renderBlockOutline(MatrixStack matrices, VertexConsumerProvider consumers, BlockPos pos, int color, float alpha) {\n    WorldRenderer.renderFilledBox(matrices, consumers.getBuffer(RenderLayer.getLines()), \n        pos.getX(), pos.getY(), pos.getZ(), \n        pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1, \n        ((color >> 16) & 0xFF) / 255.0f, \n        ((color >> 8) & 0xFF) / 255.0f, \n        (color & 0xFF) / 255.0f, \n        alpha);\n}",
+      "keywords": ["WorldRenderer", "renderFilledBox", "BlockPos", "outline", "alpha"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建自定义方块实体渲染器",
+      "template": "public class CustomBlockEntityRenderer implements BlockEntityRenderer<CustomBlockEntity> {\n    @Override\n    public void render(CustomBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {\n        matrices.push();\n        matrices.translate(0.5, 0.5, 0.5);\n        matrices.scale(0.5f, 0.5f, 0.5f);\n        // TODO: 渲染方块实体内容\n        matrices.pop();\n    }\n}",
+      "keywords": ["BlockEntityRenderer", "render", "push", "pop", "translate"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：渲染旋转的物品",
+      "template": "public static void renderRotatingItem(ItemStack stack, MatrixStack matrices, VertexConsumerProvider consumers, int light, int overlay, float rotation) {\n    matrices.push();\n    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotation));\n    MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.GROUND, light, overlay, matrices, consumers, null, 0);\n    matrices.pop();\n}",
+      "keywords": ["ItemRenderer", "renderItem", "multiply", "RotationAxis", "rotation"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建自定义渲染层",
+      "template": "public class CustomRenderLayer extends RenderLayer {\n    public static final RenderLayer CUSTOM = RenderLayer.get(\"custom\", \n        VertexFormats.POSITION_COLOR, \n        VertexFormat.DrawMode.QUADS, \n        256, false, false,\n        RenderLayer.MultiPhaseParameters.builder()\n            .program(RenderLayer.TRANSLUCENT_PROGRAM)\n            .transparency(TRANSLUCENT_TRANSPARENCY)\n            .build(false));\n    \n    private CustomRenderLayer(String name, VertexFormat vertexFormat, VertexFormat.DrawMode drawMode, int expectedBufferSize, boolean hasCrumbling, boolean translucent, Runnable startAction, Runnable endAction) {\n        super(name, vertexFormat, drawMode, expectedBufferSize, hasCrumbling, translucent, startAction, endAction);\n    }\n}",
+      "keywords": ["RenderLayer", "get", "MultiPhaseParameters", "TRANSLUCENT_TRANSPARENCY", "custom"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：HudRenderCallback用于什么？",
+      "options": ["A. 渲染HUD元素", "B. 渲染世界", "C. 渲染实体", "D. 渲染方块"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：WorldRenderEvents.AFTER_ENTITIES在什么时候调用？",
+      "options": ["A. 实体渲染之后", "B. 实体渲染之前", "C. 方块渲染之后", "D. 天空渲染之后"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：MatrixStack的push和pop方法用于什么？",
+      "options": ["A. 保存和恢复变换状态", "B. 添加和删除顶点", "C. 开始和结束渲染", "D. 加载和卸载纹理"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：VertexConsumer的vertex方法用于什么？",
+      "options": ["A. 添加顶点", "B. 添加颜色", "C. 添加纹理", "D. 添加法线"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：RenderLayer.getLines()返回什么？",
+      "options": ["A. 线条渲染层", "B. 实体渲染层", "C. 方块渲染层", "D. 透明渲染层"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：BlockEntityRenderer的render方法中tickDelta参数表示什么？",
+      "options": ["A. 帧间插值", "B. 渲染次数", "C. 渲染时间", "D. 渲染帧率"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：ModelTransformationMode.GROUND表示什么？",
+      "options": ["A. 地面上的物品", "B. GUI中的物品", "C. 手中的物品", "D. 第一人称物品"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：RenderLayer.MultiPhaseParameters用于什么？",
+      "options": ["A. 配置渲染层参数", "B. 配置渲染阶段", "C. 配置渲染器", "D. 配置渲染目标"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：VertexFormats.POSITION_COLOR包含哪些数据？",
+      "options": ["A. 位置和颜色", "B. 位置和纹理", "C. 位置和法线", "D. 位置和光照"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：TRANSLUCENT_TRANSPARENCY表示什么？",
+      "options": ["A. 半透明混合", "B. 不透明混合", "C. 加法混合", "D. 乘法混合"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

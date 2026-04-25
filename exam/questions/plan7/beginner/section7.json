@@ -1,0 +1,124 @@
+{
+  "name": "框题七：高级网络同步",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：同步方块实体数据",
+      "template": "public class SyncedBlockEntity extends BlockEntity {\n    private int syncedValue = 0;\n    \n    @Override\n    public void markDirty() {\n        super.markDirty();\n        if (world != null && !world.isClient) {\n            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);\n        }\n    }\n    \n    @Override\n    public NbtCompound toInitialChunkDataNbt() {\n        return createNbt();\n    }\n    \n    public int getSyncedValue() { return syncedValue; }\n    public void setSyncedValue(int value) { this.syncedValue = value; markDirty(); }\n}",
+      "keywords": ["markDirty", "toInitialChunkDataNbt", "updateListeners", "sync", "BlockEntity"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建实体数据追踪器",
+      "template": "public class CustomEntity extends LivingEntity {\n    private static final TrackedData<Integer> CUSTOM_DATA = DataTracker.registerData(CustomEntity.class, TrackedDataHandlerRegistry.INTEGER);\n    \n    @Override\n    protected void initDataTracker() {\n        this.dataTracker.startTracking(CUSTOM_DATA, 0);\n    }\n    \n    public int getCustomData() {\n        return this.dataTracker.get(CUSTOM_DATA);\n    }\n    \n    public void setCustomData(int value) {\n        this.dataTracker.set(CUSTOM_DATA, value);\n    }\n}",
+      "keywords": ["TrackedData", "DataTracker", "registerData", "startTracking", "TrackedDataHandlerRegistry"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：自定义数据追踪器类型",
+      "template": "public class CustomTrackedDataHandler implements TrackedDataHandler<CustomData> {\n    @Override\n    public void write(PacketByteBuf buf, CustomData value) {\n        buf.writeInt(value.value());\n        buf.writeString(value.name());\n    }\n    \n    @Override\n    public CustomData read(PacketByteBuf buf) {\n        return new CustomData(buf.readInt(), buf.readString());\n    }\n    \n    @Override\n    public CustomData copy(CustomData value) {\n        return new CustomData(value.value(), value.name());\n    }\n}",
+      "keywords": ["TrackedDataHandler", "write", "read", "copy", "PacketByteBuf"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：批量同步玩家数据",
+      "template": "public class PlayerDataSync {\n    private static final Identifier SYNC_PACKET = new Identifier(\"modid\", \"player_sync\");\n    \n    public static void syncAllPlayers(ServerWorld world) {\n        PacketByteBuf buf = PacketByteBufs.create();\n        buf.writeInt(world.getPlayers().size());\n        for (ServerPlayerEntity player : world.getPlayers()) {\n            buf.writeUuid(player.getUuid());\n            buf.writeInt(player.experienceLevel);\n        }\n        \n        for (ServerPlayerEntity player : world.getPlayers()) {\n            ServerPlayNetworking.send(player, SYNC_PACKET, buf);\n        }\n    }\n}",
+      "keywords": ["PacketByteBufs", "writeUuid", "writeInt", "ServerPlayNetworking", "sync"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：同步自定义能力",
+      "template": "public class CustomAbilityComponent implements Component {\n    private int energy = 100;\n    private int maxEnergy = 100;\n    \n    @Override\n    public void readFromNbt(NbtCompound nbt) {\n        energy = nbt.getInt(\"Energy\");\n    }\n    \n    @Override\n    public void writeToNbt(NbtCompound nbt) {\n        nbt.putInt(\"Energy\", energy);\n    }\n    \n    public void sync(ServerPlayerEntity player) {\n        ComponentChanges changes = ComponentChanges.builder()\n            .add(ModComponents.CUSTOM_ABILITY, this)\n            .build();\n        player.networkHandler.sendPacket(new ComponentUpdateS2CPacket(player.getId(), changes));\n    }\n}",
+      "keywords": ["Component", "readFromNbt", "writeToNbt", "ComponentUpdateS2CPacket", "sync"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：增量数据同步",
+      "template": "public class IncrementalSyncManager {\n    private final Map<Identifier, Object> lastSynced = new HashMap<>();\n    \n    public void syncIfChanged(ServerPlayerEntity player, Identifier key, Object newValue) {\n        Object oldValue = lastSynced.get(key);\n        if (!Objects.equals(oldValue, newValue)) {\n            sendUpdate(player, key, newValue);\n            lastSynced.put(key, newValue);\n        }\n    }\n    \n    private void sendUpdate(ServerPlayerEntity player, Identifier key, Object value) {\n        PacketByteBuf buf = PacketByteBufs.create();\n        buf.writeIdentifier(key);\n        // 写入 value\n        ServerPlayNetworking.send(player, UPDATE_PACKET, buf);\n    }\n}",
+      "keywords": ["incremental", "sync", "Map", "Objects.equals", "sendUpdate"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：同步世界时间",
+      "template": "public class TimeSyncManager {\n    public static void syncTime(ServerWorld world, ServerPlayerEntity player) {\n        PacketByteBuf buf = PacketByteBufs.create();\n        buf.writeLong(world.getTime());\n        buf.writeLong(world.getTimeOfDay());\n        buf.writeBoolean(world.isRaining());\n        buf.writeInt(world.getThunderTime());\n        ServerPlayNetworking.send(player, TIME_SYNC_PACKET, buf);\n    }\n}",
+      "keywords": ["getTime", "getTimeOfDay", "isRaining", "getThunderTime", "time sync"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：markDirty方法在BlockEntity中的作用是什么？",
+      "options": ["A. 标记需要同步到客户端", "B. 标记需要保存", "C. 标记需要删除", "D. 标记需要更新"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：toInitialChunkDataNbt方法用于什么？",
+      "options": ["A. 区块加载时的初始数据同步", "B. 保存数据", "C. 读取数据", "D. 网络包序列化"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：TrackedData用于什么？",
+      "options": ["A. 实体数据同步", "B. 方块数据同步", "C. 物品数据同步", "D. 世界数据同步"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：TrackedDataHandlerRegistry.INTEGER处理什么类型？",
+      "options": ["A. 整数", "B. 字符串", "C. 布尔值", "D. 浮点数"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：ComponentUpdateS2CPacket用于什么？",
+      "options": ["A. 同步组件数据", "B. 同步实体数据", "C. 同步方块数据", "D. 同步物品数据"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：PacketByteBufs.create()创建什么？",
+      "options": ["A. 数据包缓冲区", "B. 网络连接", "C. 数据包", "D. 字节数组"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：增量同步的优势是什么？",
+      "options": ["A. 减少网络带宽使用", "B. 增加同步速度", "C. 提高数据精度", "D. 简化代码"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：updateListeners方法的第三个参数是什么？",
+      "options": ["A. 新方块状态", "B. 旧方块状态", "C. 更新标志", "D. 更新位置"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：world.isClient用于什么？",
+      "options": ["A. 判断是否为客户端", "B. 判断是否为服务端", "C. 判断是否为单人游戏", "D. 判断是否为多人游戏"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：ServerPlayNetworking.send需要哪些参数？",
+      "options": ["A. player, identifier, buf", "B. identifier, buf", "C. player, buf", "D. identifier, player, data"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

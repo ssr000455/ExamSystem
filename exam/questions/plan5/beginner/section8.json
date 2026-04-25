@@ -1,0 +1,124 @@
+{
+  "name": "框题八：自定义方块实体",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：创建方块实体类",
+      "template": "public class CustomBlockEntity extends BlockEntity {\n    private int customData = 0;\n    public CustomBlockEntity(BlockPos pos, BlockState state) {\n        super(ModBlockEntities.CUSTOM, pos, state);\n    }\n    public int getCustomData() { return customData; }\n    public void setCustomData(int data) { this.customData = data; markDirty(); }\n    @Override\n    public void writeNbt(NbtCompound nbt) { super.writeNbt(nbt); nbt.putInt(\"custom_data\", customData); }\n    @Override\n    public void readNbt(NbtCompound nbt) { super.readNbt(nbt); this.customData = nbt.getInt(\"custom_data\"); }\n}",
+      "keywords": ["BlockEntity", "markDirty", "writeNbt", "readNbt", "NbtCompound"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：注册方块实体类型",
+      "template": "public class ModBlockEntities {\n    public static final BlockEntityType<CustomBlockEntity> CUSTOM = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(\"modid\", \"custom\"), FabricBlockEntityTypeBuilder.create(CustomBlockEntity::new, ModBlocks.CUSTOM_BLOCK).build());\n    public static void register() {}\n}",
+      "keywords": ["BlockEntityType", "Registry.register", "Registries.BLOCK_ENTITY_TYPE", "FabricBlockEntityTypeBuilder", "create"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建带有方块实体的方块",
+      "template": "public class CustomBlockWithEntity extends Block implements BlockEntityProvider {\n    public CustomBlockWithEntity(Settings settings) { super(settings); }\n    @Override\n    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) { return new CustomBlockEntity(pos, state); }\n    @Override\n    public BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }\n}",
+      "keywords": ["BlockEntityProvider", "createBlockEntity", "BlockRenderType", "MODEL", "BlockPos"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：实现方块实体 Tick",
+      "template": "public class TickableBlockEntity extends BlockEntity implements Tickable {\n    public TickableBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.TICKABLE, pos, state); }\n    @Override\n    public void tick() {\n        if (world != null && !world.isClient) {\n            // 每 tick 执行的逻辑\n        }\n    }\n}",
+      "keywords": ["Tickable", "tick", "world.isClient", "server", "logic"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：在方块实体中存储物品",
+      "template": "public class InventoryBlockEntity extends BlockEntity implements ImplementedInventory {\n    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);\n    @Override\n    public DefaultedList<ItemStack> getItems() { return inventory; }\n    @Override\n    public void writeNbt(NbtCompound nbt) {\n        super.writeNbt(nbt);\n        InventoryHelper.writeNbt(nbt, inventory);\n    }\n    @Override\n    public void readNbt(NbtCompound nbt) {\n        super.readNbt(nbt);\n        InventoryHelper.readNbt(nbt, inventory);\n    }\n}",
+      "keywords": ["ImplementedInventory", "DefaultedList", "InventoryHelper", "writeNbt", "readNbt"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建方块实体渲染器",
+      "template": "public class CustomBlockEntityRenderer implements BlockEntityRenderer<CustomBlockEntity> {\n    @Override\n    public void render(CustomBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {\n        // 渲染逻辑\n    }\n}",
+      "keywords": ["BlockEntityRenderer", "render", "tickDelta", "MatrixStack", "VertexConsumerProvider"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：注册方块实体渲染器",
+      "template": "BlockEntityRendererRegistry.register(ModBlockEntities.CUSTOM, CustomBlockEntityRenderer::new);",
+      "keywords": ["BlockEntityRendererRegistry", "register", "client", "renderer", "factory"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：方块实体注册使用的注册表是？",
+      "options": ["A. Registries.BLOCK_ENTITY_TYPE", "B. Registries.BLOCK", "C. Registries.ITEM", "D. Registries.ENTITY"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：BlockEntityProvider 接口需要实现哪个方法？",
+      "options": ["A. createBlockEntity", "B. getBlockEntity", "C. newBlockEntity", "D. initBlockEntity"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：markDirty 方法的作用是什么？",
+      "options": ["A. 标记方块实体已修改", "B. 标记方块已修改", "C. 标记世界已修改", "D. 标记玩家已修改"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：Tickable 接口的 tick 方法多久调用一次？",
+      "options": ["A. 每 tick", "B. 每秒", "C. 每分", "D. 每小时"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：ImplementedInventory 接口用于什么？",
+      "options": ["A. 实现物品栏", "B. 实现方块实体", "C. 实现渲染", "D. 实现网络"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：InventoryHelper 的 writeNbt 方法用于什么？",
+      "options": ["A. 保存物品栏到 NBT", "B. 读取物品栏从 NBT", "C. 复制物品栏", "D. 清空物品栏"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：方块实体渲染器需要在哪个端注册？",
+      "options": ["A. 客户端", "B. 服务端", "C. 两端都需要", "D. 任意一端"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：BlockEntity 的构造方法需要什么参数？",
+      "options": ["A. BlockPos 和 BlockState", "B. BlockEntityType 和 BlockPos", "C. BlockEntityType 和 World", "D. BlockPos 和 World"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：FabricBlockEntityTypeBuilder 的 build 方法返回什么？",
+      "options": ["A. BlockEntityType", "B. BlockEntity", "C. Block", "D. Item"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：DefaultedList.ofSize 的第一个参数表示什么？",
+      "options": ["A. 物品栏大小", "B. 物品数量", "C. 堆叠大小", "D. 耐久值"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "name": "框题三：命令注册",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：注册简单命令",
+      "template": "CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {\n    dispatcher.register(literal(\"hello\").executes(context -> {\n        context.getSource().sendFeedback(() -> Text.literal(\"Hello World!\"), false);\n        return 1;\n    }));\n});",
+      "keywords": ["CommandRegistrationCallback", "literal", "executes", "sendFeedback", "return 1"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：创建带参数的命令",
+      "template": "dispatcher.register(literal(\"giveitem\")\n    .then(argument(\"target\", EntityArgumentType.player())\n        .then(argument(\"item\", ItemStackArgumentType.itemStack())\n            .executes(context -> {\n                ServerPlayerEntity target = EntityArgumentType.getPlayer(context, \"target\");\n                ItemStack stack = ItemStackArgumentType.getItemStackArgument(context, \"item\").createStack(1, false);\n                target.getInventory().insertStack(stack);\n                return 1;\n            }))));",
+      "keywords": ["argument", "EntityArgumentType", "ItemStackArgumentType", "getPlayer", "createStack"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：创建带整数参数的命令",
+      "template": "dispatcher.register(literal(\"setvalue\")\n    .then(argument(\"value\", IntegerArgumentType.integer(1, 100))\n        .executes(context -> {\n            int value = IntegerArgumentType.getInteger(context, \"value\");\n            context.getSource().sendFeedback(() -> Text.literal(\"设置值为: \" + value), false);\n            return 1;\n        })));",
+      "keywords": ["IntegerArgumentType", "integer", "getInteger", "min", "max"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：创建需要 OP 权限的命令",
+      "template": "dispatcher.register(literal(\"admin\")\n    .requires(source -> source.hasPermissionLevel(2))\n    .executes(context -> {\n        context.getSource().sendFeedback(() -> Text.literal(\"管理员命令\"), true);\n        return 1;\n    }));",
+      "keywords": ["requires", "hasPermissionLevel", "OP", "2", "admin"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：创建子命令",
+      "template": "dispatcher.register(literal(\"mod\")\n    .then(literal(\"reload\")\n        .executes(context -> {\n            // 重新加载逻辑\n            return 1;\n        }))\n    .then(literal(\"status\")\n        .executes(context -> {\n            // 状态查询逻辑\n            return 1;\n        })));",
+      "keywords": ["literal", "子命令", "reload", "status", "then"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：创建带建议的命令",
+      "template": "dispatcher.register(literal(\"givecustom\")\n    .then(argument(\"item\", StringArgumentType.word())\n        .suggests((context, builder) -> {\n            builder.suggest(\"sword\");\n            builder.suggest(\"pickaxe\");\n            builder.suggest(\"axe\");\n            return builder.buildFuture();\n        })\n        .executes(context -> {\n            String item = StringArgumentType.getString(context, \"item\");\n            return 1;\n        })));",
+      "keywords": ["suggests", "SuggestionProvider", "builder.suggest", "StringArgumentType", "getString"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：创建命令帮助",
+      "template": "dispatcher.register(literal(\"help\")\n    .executes(context -> {\n        context.getSource().sendFeedback(() -> Text.literal(\"可用命令:\"), false);\n        context.getSource().sendFeedback(() -> Text.literal(\"/hello - 打招呼\"), false);\n        context.getSource().sendFeedback(() -> Text.literal(\"/giveitem <玩家> <物品> - 给予物品\"), false);\n        return 1;\n    }));",
+      "keywords": ["help", "sendFeedback", "命令列表", "可用命令", "description"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：命令注册使用的回调是？",
+      "options": ["A. CommandRegistrationCallback", "B. CommandRegistryCallback", "C. CommandRegisterEvent", "D. CommandInitCallback"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：literal 方法用于创建什么？",
+      "options": ["A. 字面量命令节点", "B. 参数节点", "C. 执行节点", "D. 建议节点"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：argument 方法用于创建什么？",
+      "options": ["A. 参数节点", "B. 字面量节点", "C. 执行节点", "D. 建议节点"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题4：executes 方法用于什么？",
+      "options": ["A. 定义命令执行逻辑", "B. 定义参数", "C. 定义子命令", "D. 定义权限"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题5：requires 方法用于什么？",
+      "options": ["A. 设置权限要求", "B. 设置参数", "C. 设置子命令", "D. 设置帮助"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题6：hasPermissionLevel(2) 表示需要什么权限？",
+      "options": ["A. OP 权限", "B. 普通玩家", "C. 控制台", "D. 命令方块"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题7：EntityArgumentType.player() 用于什么？",
+      "options": ["A. 获取玩家参数", "B. 获取实体参数", "C. 获取物品参数", "D. 获取位置参数"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题8：ItemStackArgumentType.itemStack() 用于什么？",
+      "options": ["A. 获取物品参数", "B. 获取玩家参数", "C. 获取实体参数", "D. 获取位置参数"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题9：IntegerArgumentType.integer(1, 100) 中的参数表示什么？",
+      "options": ["A. 最小值和最大值", "B. 默认值和最大值", "C. 最小值和默认值", "D. 步长和最大值"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题10：sendFeedback 的第二个参数为 true 表示什么？",
+      "options": ["A. 广播给所有 OP", "B. 仅发送给执行者", "C. 广播给所有玩家", "D. 发送到控制台"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "框题七：日志与调试",
+  "questions": [
+    {
+      "type": "program",
+      "title": "编程题1：配置日志级别",
+      "template": "// log4j2.xml\n<Configuration>\n  <Loggers>\n    <Logger name=\"modid\" level=\"DEBUG\"/>\n  </Loggers>\n</Configuration>",
+      "keywords": ["log4j2", "Logger", "level", "DEBUG", "INFO"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题2：使用 SLF4J 日志",
+      "template": "public class LogExample {\n    private static final Logger LOGGER = LoggerFactory.getLogger(\"modid\");\n    \n    public static void logExample() {\n        // TODO: 输出各级别日志\n    }\n}",
+      "keywords": ["Logger", "info", "warn", "error", "debug"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题3：条件日志输出",
+      "template": "if (LOGGER.isDebugEnabled()) {\n    // TODO: 仅在调试时执行的代码\n}",
+      "keywords": ["isDebugEnabled", "isTraceEnabled", "isInfoEnabled", "conditional", "performance"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题4：日志格式化",
+      "template": "LOGGER.info(\"Player {} joined at position ({}, {}, {})\", player.getName(), x, y, z);",
+      "keywords": ["placeholder", "{}", "format", "parameterized", "slf4j"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题5：异常日志记录",
+      "template": "try {\n    // 可能抛出异常的代码\n} catch (Exception e) {\n    // TODO: 记录异常\n}",
+      "keywords": ["error", "getMessage", "printStackTrace", "exception", "throwable"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题6：性能计时日志",
+      "template": "long start = System.nanoTime();\n// 执行操作\nlong duration = System.nanoTime() - start;\nLOGGER.debug(\"Operation took {} ns\", duration);",
+      "keywords": ["nanoTime", "duration", "performance", "timing", "benchmark"],
+      "maxScore": 10
+    },
+    {
+      "type": "program",
+      "title": "编程题7：自定义日志输出文件",
+      "template": "// log4j2.xml\n<Appenders>\n  <File name=\"File\" fileName=\"logs/modid.log\">\n    <!-- TODO: 配置文件输出格式 -->\n  </File>\n</Appenders>",
+      "keywords": ["File", "Appender", "PatternLayout", "fileName", "rolling"],
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题1：SLF4J 中 DEBUG 级别的日志什么时候输出？",
+      "options": ["A. 开发调试时", "B. 生产环境", "C. 错误时", "D. 总是输出"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题2：isDebugEnabled() 的作用是什么？",
+      "options": ["A. 避免不必要的字符串拼接", "B. 启用调试模式", "C. 检查错误", "D. 关闭日志"],
+      "answer": 0,
+      "maxScore": 10
+    },
+    {
+      "type": "choice",
+      "title": "选择题3：以下哪个日志级别最高？",
+      "options": ["A. ERROR", "B. WARN", "C. INFO", "D. DEBUG"],
+      "answer": 0,
+      "maxScore": 10
+    }
+  ]
+}
