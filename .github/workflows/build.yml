@@ -33,8 +33,8 @@ jobs:
           cp -r exam/questions dist/
           cp -r exam/models dist/
           cp -r exam/scenes dist/
-          cp exam/README_*.md dist/ 2>nul || echo "No README files"
-          rm -f dist/start-exam.sh
+          cp exam/README_*.md dist/ 2>nul
+          if (Test-Path dist/start-exam.sh) { Remove-Item dist/start-exam.sh }
 
       - name: Build EXE with jpackage
         run: |
